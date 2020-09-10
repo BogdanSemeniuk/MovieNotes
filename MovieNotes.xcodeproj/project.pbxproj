@@ -13,7 +13,18 @@
 		F5A3189824EFCDF800F7CE77 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5A3189624EFCDF800F7CE77 /* Main.storyboard */; };
 		F5A3189A24EFCDFB00F7CE77 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F5A3189924EFCDFB00F7CE77 /* Assets.xcassets */; };
 		F5A3189D24EFCDFB00F7CE77 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F5A3189B24EFCDFB00F7CE77 /* LaunchScreen.storyboard */; };
+		F5C54FBA250A563C00C2C3A8 /* MovieNotesTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5C54FB9250A563C00C2C3A8 /* MovieNotesTests.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		F5C54FBC250A563C00C2C3A8 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = F5A3188524EFCDF700F7CE77 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = F5A3188C24EFCDF700F7CE77;
+			remoteInfo = MovieNotes;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		F5A3188D24EFCDF700F7CE77 /* MovieNotes.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MovieNotes.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -23,11 +34,21 @@
 		F5A3189724EFCDF800F7CE77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		F5A3189924EFCDFB00F7CE77 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		F5A3189C24EFCDFB00F7CE77 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		F5A3189E24EFCDFB00F7CE77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F5A3189E24EFCDFB00F7CE77 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = "MovieNotes/Suporting files/Info.plist"; sourceTree = SOURCE_ROOT; };
+		F5C54FB7250A563C00C2C3A8 /* MovieNotesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieNotesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		F5C54FB9250A563C00C2C3A8 /* MovieNotesTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieNotesTests.swift; sourceTree = "<group>"; };
+		F5C54FBB250A563C00C2C3A8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		F5A3188A24EFCDF700F7CE77 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5C54FB4250A563C00C2C3A8 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -41,6 +62,7 @@
 			isa = PBXGroup;
 			children = (
 				F5A3188F24EFCDF700F7CE77 /* MovieNotes */,
+				F5C54FB8250A563C00C2C3A8 /* MovieNotesTests */,
 				F5A3188E24EFCDF700F7CE77 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -49,6 +71,7 @@
 			isa = PBXGroup;
 			children = (
 				F5A3188D24EFCDF700F7CE77 /* MovieNotes.app */,
+				F5C54FB7250A563C00C2C3A8 /* MovieNotesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -56,15 +79,56 @@
 		F5A3188F24EFCDF700F7CE77 /* MovieNotes */ = {
 			isa = PBXGroup;
 			children = (
+				F5C54FC3250A622100C2C3A8 /* Controller */,
+				F5C54FC2250A621700C2C3A8 /* View */,
+				F5C54FC1250A620F00C2C3A8 /* Model */,
+				F5C54FC4250A623500C2C3A8 /* Suporting files */,
+			);
+			path = MovieNotes;
+			sourceTree = "<group>";
+		};
+		F5C54FB8250A563C00C2C3A8 /* MovieNotesTests */ = {
+			isa = PBXGroup;
+			children = (
+				F5C54FB9250A563C00C2C3A8 /* MovieNotesTests.swift */,
+				F5C54FBB250A563C00C2C3A8 /* Info.plist */,
+			);
+			path = MovieNotesTests;
+			sourceTree = "<group>";
+		};
+		F5C54FC1250A620F00C2C3A8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		F5C54FC2250A621700C2C3A8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		F5C54FC3250A622100C2C3A8 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				F5A3189424EFCDF700F7CE77 /* ViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		F5C54FC4250A623500C2C3A8 /* Suporting files */ = {
+			isa = PBXGroup;
+			children = (
 				F5A3189024EFCDF700F7CE77 /* AppDelegate.swift */,
 				F5A3189224EFCDF700F7CE77 /* SceneDelegate.swift */,
-				F5A3189424EFCDF700F7CE77 /* ViewController.swift */,
 				F5A3189624EFCDF800F7CE77 /* Main.storyboard */,
 				F5A3189924EFCDFB00F7CE77 /* Assets.xcassets */,
 				F5A3189B24EFCDFB00F7CE77 /* LaunchScreen.storyboard */,
 				F5A3189E24EFCDFB00F7CE77 /* Info.plist */,
 			);
-			path = MovieNotes;
+			path = "Suporting files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -87,6 +151,24 @@
 			productReference = F5A3188D24EFCDF700F7CE77 /* MovieNotes.app */;
 			productType = "com.apple.product-type.application";
 		};
+		F5C54FB6250A563C00C2C3A8 /* MovieNotesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F5C54FC0250A563C00C2C3A8 /* Build configuration list for PBXNativeTarget "MovieNotesTests" */;
+			buildPhases = (
+				F5C54FB3250A563C00C2C3A8 /* Sources */,
+				F5C54FB4250A563C00C2C3A8 /* Frameworks */,
+				F5C54FB5250A563C00C2C3A8 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				F5C54FBD250A563C00C2C3A8 /* PBXTargetDependency */,
+			);
+			name = MovieNotesTests;
+			productName = MovieNotesTests;
+			productReference = F5C54FB7250A563C00C2C3A8 /* MovieNotesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -99,6 +181,10 @@
 				TargetAttributes = {
 					F5A3188C24EFCDF700F7CE77 = {
 						CreatedOnToolsVersion = 11.6;
+					};
+					F5C54FB6250A563C00C2C3A8 = {
+						CreatedOnToolsVersion = 11.6;
+						TestTargetID = F5A3188C24EFCDF700F7CE77;
 					};
 				};
 			};
@@ -116,6 +202,7 @@
 			projectRoot = "";
 			targets = (
 				F5A3188C24EFCDF700F7CE77 /* MovieNotes */,
+				F5C54FB6250A563C00C2C3A8 /* MovieNotesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -128,6 +215,13 @@
 				F5A3189D24EFCDFB00F7CE77 /* LaunchScreen.storyboard in Resources */,
 				F5A3189A24EFCDFB00F7CE77 /* Assets.xcassets in Resources */,
 				F5A3189824EFCDF800F7CE77 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		F5C54FB5250A563C00C2C3A8 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -144,7 +238,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		F5C54FB3250A563C00C2C3A8 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F5C54FBA250A563C00C2C3A8 /* MovieNotesTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		F5C54FBD250A563C00C2C3A8 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = F5A3188C24EFCDF700F7CE77 /* MovieNotes */;
+			targetProxy = F5C54FBC250A563C00C2C3A8 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		F5A3189624EFCDF800F7CE77 /* Main.storyboard */ = {
@@ -285,12 +395,14 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V89KEZWRU;
-				INFOPLIST_FILE = MovieNotes/Info.plist;
+				INFOPLIST_FILE = "MovieNotes/Suporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbvprojects.MovieNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
@@ -303,16 +415,58 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V89KEZWRU;
-				INFOPLIST_FILE = MovieNotes/Info.plist;
+				INFOPLIST_FILE = "MovieNotes/Suporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.sbvprojects.MovieNotes;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		F5C54FBE250A563C00C2C3A8 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4V89KEZWRU;
+				INFOPLIST_FILE = MovieNotesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sbvprojects.MovieNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieNotes.app/MovieNotes";
+			};
+			name = Debug;
+		};
+		F5C54FBF250A563C00C2C3A8 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 4V89KEZWRU;
+				INFOPLIST_FILE = MovieNotesTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = com.sbvprojects.MovieNotesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MovieNotes.app/MovieNotes";
 			};
 			name = Release;
 		};
@@ -333,6 +487,15 @@
 			buildConfigurations = (
 				F5A318A224EFCDFB00F7CE77 /* Debug */,
 				F5A318A324EFCDFB00F7CE77 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F5C54FC0250A563C00C2C3A8 /* Build configuration list for PBXNativeTarget "MovieNotesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F5C54FBE250A563C00C2C3A8 /* Debug */,
+				F5C54FBF250A563C00C2C3A8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
