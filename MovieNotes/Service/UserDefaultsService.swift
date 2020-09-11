@@ -11,9 +11,20 @@ import Foundation
 final class UserDefaultsService {
     private(set) var userDefaults: UserDefaults
     private(set) var coder: Coder
+    private let genresKey = "genresKey"
     
     init(userDefaults: UserDefaults, coder: Coder) {
         self.userDefaults = userDefaults
         self.coder = coder
+    }
+    
+    func save(_ genres: [Genre]) {
+        let data = coder.toData(object: genres)
+        userDefaults.set(data, forKey: genresKey)
+    }
+    
+    func fetchGenres() -> [Genre] {
+        guard let data = userDefaults.data(forKey: genresKey), let genres = coder.map(data: data, type: [Genre].self) else { return [] }
+        return genres
     }
 }

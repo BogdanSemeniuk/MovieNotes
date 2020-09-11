@@ -45,6 +45,16 @@ class CoderTests: XCTestCase {
         XCTAssertEqual(genre.name, object.name, "Names must be equal")
     }
     
+    func testMapArrayOfObjects() {
+        // given
+        let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
+        guard let data = sut?.toData(object: genres) else { XCTFail("Can't create data"); return }
+        // when
+        guard let objects = sut?.map(data: data, type: [Genre].self) else { XCTFail("Can't map Genre from data"); return }
+        //then
+        XCTAssertEqual(objects.count, 2, "Objects count must be two")
+    }
+    
     func testMapObjectFailIfWrongTypeExpected() {
         // given
         let genre = Genre(id: 0, name: "Action")
