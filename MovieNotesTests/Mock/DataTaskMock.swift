@@ -7,6 +7,7 @@
 //
 
 import Foundation
+@testable import MovieNotes
 
 class MockDataTask: URLSessionDataTask {
     private let data: Data?
@@ -24,11 +25,12 @@ class MockDataTask: URLSessionDataTask {
         completionHandler?(data, urlResponse, urlError)
     }
     
-    static func createTask(type: ResponseType) -> MockDataTask {
-        switch type {
+    static func createTask(responseType: ResponseType) -> MockDataTask {
+        switch responseType {
         case .genreData:
-            
-            return MockDataTask(data: Data(), urlResponse: nil, urlError: nil)
+            guard let path = Bundle.init(for: MockDataTask.self).path(forResource: "genres", ofType: nil),
+                let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
+            return MockDataTask(data: data, urlResponse: nil, urlError: nil)
         case .stringData:
             return MockDataTask(data: "Message".data(using: .utf8), urlResponse: nil, urlError: nil)
         case .mappingError: return MockDataTask(data: nil, urlResponse: nil, urlError: CustomError.mappingError)

@@ -16,4 +16,18 @@ final class NetworkingService {
         self.session = session
         self.coder = coder
     }
+    
+    func makeRequst<T: Decodable>(_ urlRequest: URLRequest, castingType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+        session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, _, error) in
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            guard let data = data, let obj = self?.coder.map(data: data, type: castingType) else {
+                completion(.failure(CustomError.mappingError));
+                return
+            }
+            completion(.success(obj))
+            }).resume()
+    }
 }
