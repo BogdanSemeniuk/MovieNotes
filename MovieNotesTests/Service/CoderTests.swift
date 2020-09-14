@@ -30,7 +30,7 @@ class CoderTests: XCTestCase {
         let genre = Genre(id: 0, name: "Action")
         // when
         let data = sut?.toData(object: genre)
-        //then
+        // then
         XCTAssertNotNil(data)
     }
     
@@ -40,7 +40,7 @@ class CoderTests: XCTestCase {
         guard let data = sut?.toData(object: genre) else { XCTFail("Can't create data"); return }
         // when
         guard let object = sut?.map(data: data, type: Genre.self) else { XCTFail("Can't map Genre from data"); return }
-        //then
+        // then
         XCTAssertEqual(genre.id, object.id, "Ids must be equal")
         XCTAssertEqual(genre.name, object.name, "Names must be equal")
     }
@@ -51,7 +51,7 @@ class CoderTests: XCTestCase {
         guard let data = sut?.toData(object: genres) else { XCTFail("Can't create data"); return }
         // when
         guard let objects = sut?.map(data: data, type: [Genre].self) else { XCTFail("Can't map Genre from data"); return }
-        //then
+        // then
         XCTAssertEqual(objects.count, 2, "Objects count must be two")
     }
     
@@ -61,7 +61,7 @@ class CoderTests: XCTestCase {
         guard let data = sut?.toData(object: genre) else { XCTFail("Can't create data"); return }
         // when
         let object = sut?.map(data: data, type: String.self)
-        //then
+        // then
         XCTAssertNil(object, "Object maust be nil")
     }
 }
