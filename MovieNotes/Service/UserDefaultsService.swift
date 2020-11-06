@@ -9,8 +9,8 @@
 import Foundation
 
 final class UserDefaultsService {
-    private(set) var userDefaults: UserDefaults
-    private(set) var coder: Coder
+    private var userDefaults: UserDefaults
+    private var coder: Coder
     private let genresKey = "genresKey"
     
     init(userDefaults: UserDefaults, coder: Coder) {

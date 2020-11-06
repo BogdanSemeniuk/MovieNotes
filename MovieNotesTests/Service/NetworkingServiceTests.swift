@@ -24,12 +24,6 @@ class NetworkingServiceTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func testAllDependenciesExistAfterInit() {
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask(data: Data(), urlResponse: nil, urlError: nil)), coder: Coder())
-        XCTAssertNotNil(sut.coder)
-        XCTAssertNotNil(sut.session)
-    }
-    
     func testFetchGenres() {
         // given
         let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder())

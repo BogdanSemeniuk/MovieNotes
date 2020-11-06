@@ -9,8 +9,8 @@
 import Foundation
 
 final class NetworkingService {
-    private(set) var session: NetworkSession
-    private(set) var coder: Coder
+    private var session: NetworkSession
+    private var coder: Coder
     
     init(session: NetworkSession, coder: Coder) {
         self.session = session
