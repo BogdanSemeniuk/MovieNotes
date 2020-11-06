@@ -1,15 +1,14 @@
 //
-//  DependencyContainerTests.swift
+//  DataManagerTests.swift
 //  MovieNotesTests
 //
-//  Created by Богдан Семенюк on 10.09.2020.
+//  Created by Богдан Семенюк on 06.11.2020.
 //  Copyright © 2020 Богдан Семенюк. All rights reserved.
 //
 
 import XCTest
-@testable import MovieNotes
 
-class DependencyContainerTests: XCTestCase {
+class DataManagerTests: XCTestCase {
 
     override func setUpWithError() throws {
         // Put setup code here. This method is called before the invocation of each test method in the class.
