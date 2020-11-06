@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		F52124602555A0D60030DFD9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521245F2555A0D60030DFD9 /* Country.swift */; };
+		F52124642555A19C0030DFD9 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124632555A19C0030DFD9 /* Worker.swift */; };
+		F52124682555A1AD0030DFD9 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124672555A1AD0030DFD9 /* Actor.swift */; };
+		F521246C2555A1BE0030DFD9 /* Credits.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521246B2555A1BE0030DFD9 /* Credits.swift */; };
+		F52124702555A2210030DFD9 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521246F2555A2210030DFD9 /* Movie.swift */; };
 		F542114F250FA57B00D6ACFE /* CustomErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F542114E250FA57B00D6ACFE /* CustomErrorTests.swift */; };
 		F573320B250F6F6B002FB2DD /* NetworkingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */; };
 		F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320C250F6FEC002FB2DD /* NetworkingService.swift */; };
@@ -39,6 +44,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		F521245F2555A0D60030DFD9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		F52124632555A19C0030DFD9 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
+		F52124672555A1AD0030DFD9 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
+		F521246B2555A1BE0030DFD9 /* Credits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Credits.swift; sourceTree = "<group>"; };
+		F521246F2555A2210030DFD9 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		F542114E250FA57B00D6ACFE /* CustomErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorTests.swift; sourceTree = "<group>"; };
 		F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTests.swift; sourceTree = "<group>"; };
 		F573320C250F6FEC002FB2DD /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
@@ -147,6 +157,11 @@
 			isa = PBXGroup;
 			children = (
 				F5C54FC5250A756800C2C3A8 /* Genre.swift */,
+				F521245F2555A0D60030DFD9 /* Country.swift */,
+				F52124632555A19C0030DFD9 /* Worker.swift */,
+				F52124672555A1AD0030DFD9 /* Actor.swift */,
+				F521246B2555A1BE0030DFD9 /* Credits.swift */,
+				F521246F2555A2210030DFD9 /* Movie.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -308,14 +323,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F52124702555A2210030DFD9 /* Movie.swift in Sources */,
 				F5C54FC6250A756800C2C3A8 /* Genre.swift in Sources */,
 				F5DA5A18250BA1E70077BA59 /* Coder.swift in Sources */,
 				F5A3189124EFCDF700F7CE77 /* AppDelegate.swift in Sources */,
+				F521246C2555A1BE0030DFD9 /* Credits.swift in Sources */,
+				F52124682555A1AD0030DFD9 /* Actor.swift in Sources */,
 				F5DA5A12250B9A560077BA59 /* UserDefaultsService.swift in Sources */,
 				F5A3189324EFCDF700F7CE77 /* SceneDelegate.swift in Sources */,
 				F5733218250F8B0F002FB2DD /* CustomError.swift in Sources */,
 				F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */,
 				F5733210250F7409002FB2DD /* NetworkingSession.swift in Sources */,
+				F52124602555A0D60030DFD9 /* Country.swift in Sources */,
+				F52124642555A19C0030DFD9 /* Worker.swift in Sources */,
 				F5C54FCA250A7A7F00C2C3A8 /* Helper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
