@@ -14,7 +14,7 @@ class CoderTests: XCTestCase {
     private var sut: Coder?
     
     override func setUpWithError() throws {
-        sut = Coder()
+        sut = Coder.shared
     }
 
     override func tearDownWithError() throws {

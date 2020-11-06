@@ -16,7 +16,7 @@ class UserDefaultsServiceTests: XCTestCase {
     override func setUpWithError() throws {
         let userDefaults = UserDefaults(suiteName: #file)!
         userDefaults.removePersistentDomain(forName: #file)
-        let coder = Coder()
+        let coder = Coder.shared
         sut = UserDefaultsService(userDefaults: userDefaults, coder: coder)
     }
 

@@ -9,8 +9,10 @@
 import Foundation
 
 final class Coder {
+    static let shared = Coder()
     private var decoder = JSONDecoder()
     private var encoder = JSONEncoder()
+    private init() {}
     
     func toData<T: Encodable>(object: T) -> Data? {
         return try? encoder.encode(object)

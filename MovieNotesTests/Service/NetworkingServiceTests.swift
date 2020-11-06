@@ -20,13 +20,13 @@ class NetworkingServiceTests: XCTestCase {
     }
     
     func testInitServiceIsNotNil() {
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask(data: Data(), urlResponse: nil, urlError: nil)), coder: Coder())
+        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask(data: Data(), urlResponse: nil, urlError: nil)), coder: Coder.shared)
         XCTAssertNotNil(sut)
     }
     
     func testFetchGenres() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder())
+        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
         var genres: [Genre]?
         
@@ -48,7 +48,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testGetErrorWhenMakeRequest() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .mappingError)), coder: Coder())
+        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .mappingError)), coder: Coder.shared)
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
@@ -68,7 +68,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testGetErrorWhenMakeRequestAndSetWrongCastingType() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder())
+        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
         let errorExpectation = expectation(description: "Mapping error expectation")
         var error: Error?
         // when
