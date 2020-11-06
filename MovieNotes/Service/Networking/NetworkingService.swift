@@ -12,7 +12,7 @@ final class NetworkingService {
     private var session: NetworkSession
     private var coder: Coder
     
-    init(session: NetworkSession, coder: Coder) {
+    init(session: NetworkSession = URLSession.shared, coder: Coder = .shared) {
         self.session = session
         self.coder = coder
     }
