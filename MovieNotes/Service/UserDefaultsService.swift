@@ -8,11 +8,7 @@
 
 import Foundation
 
-protocol UserDefaultsStorable {
-    func save(_ genres: [Genre])
-}
-
-final class UserDefaultsService: UserDefaultsStorable {
+final class UserDefaultsService {
     private var userDefaults: UserDefaults
     private var coder: Coder
     private let genresKey = "genresKey"

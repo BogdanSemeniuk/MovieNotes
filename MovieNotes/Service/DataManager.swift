@@ -9,10 +9,10 @@
 import Foundation
 
 final class DataManager {
-    private var storage: UserDefaultsStorable
+    private var storage: UserDefaultsService
     private var networking: NetworkingService
     
-    init(storage: UserDefaultsStorable, networking: NetworkingService) {
+    init(storage: UserDefaultsService, networking: NetworkingService) {
         self.storage = storage
         self.networking = networking
     }
