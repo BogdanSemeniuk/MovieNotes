@@ -32,17 +32,16 @@ class UserDefaultsServiceTests: XCTestCase {
         let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
         // when
         sut.save(genres)
-        let fetchedGenres = sut.fetchGenres()
+        let fetchedGenre = sut.fetchGenre(withId: 1)
         // then
-        XCTAssert(fetchedGenres.count == 2, "Saved genres count maust be 2")
-        XCTAssert(fetchedGenres.contains(where: { $0.id == 0 }), "Genre with id = 0 must be saved")
-        XCTAssert(fetchedGenres.contains(where: { $0.id == 1 }), "Genre with id = 0 must be saved")
+        XCTAssert(fetchedGenre?.id == 1, "Genre with id = 1 must be saved")
+        XCTAssert(fetchedGenre?.name == "Comedy", "Genre with name = Comedy must be saved")
     }
     
     func testFetchedGenresEqualEmptyArrayIfGenresWerentSavedBefore() {
         // when
-        let fetchedGenres = sut.fetchGenres()
+        let fetchedGenre = sut.fetchGenre(withId: 1)
         // then
-        XCTAssertTrue(fetchedGenres.isEmpty, "Saved genres count maust be 0")
+        XCTAssertNil(fetchedGenre, "Fetched genre must be nil")
     }
 }

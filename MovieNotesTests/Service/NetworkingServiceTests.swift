@@ -29,7 +29,6 @@ class NetworkingServiceTests: XCTestCase {
         let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
         var genres: [Genre]?
-        
         // when
         sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: [Genre].self, completion: { response in
             switch response {

@@ -23,8 +23,8 @@ final class UserDefaultsService {
         userDefaults.set(data, forKey: genresKey)
     }
     
-    func fetchGenres() -> [Genre] {
-        guard let data = userDefaults.data(forKey: genresKey), let genres = coder.map(data: data, type: [Genre].self) else { return [] }
-        return genres
+    func fetchGenre(withId id: Int) -> Genre? {
+        guard let data = userDefaults.data(forKey: genresKey), let genre = coder.map(data: data, type: [Genre].self)?.filter({ $0.id == id }).first else { return nil }
+        return genre
     }
 }
