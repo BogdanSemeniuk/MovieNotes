@@ -5,7 +5,7 @@ target 'MovieNotes' do
   
   use_frameworks!
   pod "PromiseKit/CorePromise", "~> 6.8"
-  
+  pod 'PromiseKit/Foundation'
   
   target 'MovieNotesTests' do
     inherit! :search_paths
