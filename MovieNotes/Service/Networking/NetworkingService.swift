@@ -26,17 +26,11 @@ final class NetworkingService {
         }
     }
     
-//    func makeRequst<T: Decodable>(_ urlRequest: URLRequest, castingType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-//        session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, _, error) in
-//            if let error = error {
-//                completion(.failure(error))
-//                return
-//            }
-//            guard let data = data, let obj = self?.coder.map(data: data, type: castingType) else {
-//                completion(.failure(CustomError.mappingError));
-//                return
-//            }
-//            completion(.success(obj))
-//            }).resume()
-//    }
+    func fetchMovies(page: Int, moviesFilter: MoviesFilter) -> Promise<PackageOfMovies> {
+        return firstly {
+            session.dataTask(.promise, with: Endpoint.packageOfMovies(page: page, moviesFilter: moviesFilter).request)
+        }.compactMap { [weak self] in
+            return self?.coder.map(data: $0.data, type: PackageOfMovies.self)
+        }
+    }
 }

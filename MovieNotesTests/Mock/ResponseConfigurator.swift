@@ -26,6 +26,12 @@ class ResponseConfigurator {
             return Promise {
                 return $0.reject(MockError.serverError)
             }
+        case .moviesData:
+            guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "movies", ofType: nil),
+                  let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
+            return Promise {
+                return $0.fulfill((data: data, response: URLResponseMock()))
+            }
         }
         
     }
