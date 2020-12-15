@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class NetworkingService {
     private var session: NetworkSession
@@ -17,17 +18,25 @@ final class NetworkingService {
         self.coder = coder
     }
     
-    func makeRequst<T: Decodable>(_ urlRequest: URLRequest, castingType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
-        session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, _, error) in
-            if let error = error {
-                completion(.failure(error))
-                return
-            }
-            guard let data = data, let obj = self?.coder.map(data: data, type: castingType) else {
-                completion(.failure(CustomError.mappingError));
-                return
-            }
-            completion(.success(obj))
-            }).resume()
+    func fetchGanres() -> Promise<GenresList> {
+        return firstly {
+            session.dataTask(.promise, with: Endpoint.ganresList.request)
+        }.compactMap { [weak self] in
+            return self?.coder.map(data: $0.data, type: GenresList.self)
+        }
     }
+    
+//    func makeRequst<T: Decodable>(_ urlRequest: URLRequest, castingType: T.Type, completion: @escaping (Result<T, Error>) -> Void) {
+//        session.dataTask(with: urlRequest, completionHandler: { [weak self] (data, _, error) in
+//            if let error = error {
+//                completion(.failure(error))
+//                return
+//            }
+//            guard let data = data, let obj = self?.coder.map(data: data, type: castingType) else {
+//                completion(.failure(CustomError.mappingError));
+//                return
+//            }
+//            completion(.success(obj))
+//            }).resume()
+//    }
 }

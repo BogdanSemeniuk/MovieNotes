@@ -1,4 +1,4 @@
-[
+{"genres": [
     {
         "id": 0,
         "name": "Comedy"
@@ -7,4 +7,4 @@
         "id": 1,
         "name": "Drama"
     }
-]
+]}

@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PromiseKit
 @testable import MovieNotes
 
 class NetworkingServiceTests: XCTestCase {
@@ -28,60 +29,66 @@ class NetworkingServiceTests: XCTestCase {
         // given
         let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
-        var genres: [Genre]?
+        var genresList: GenresList?
         // when
-        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: [Genre].self, completion: { response in
-            switch response {
-            case .success(let responseGenres):
-                genres = responseGenres
-                genresExpectation.fulfill()
-            default: break
-            }
-        })
+//        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: [Genre].self, completion: { response in
+//            switch response {
+//            case .success(let responseGenres):
+//                genres = responseGenres
+//                genresExpectation.fulfill()
+//            default: break
+//            }
+//        })
+        firstly {
+            sut.fetchGanres()
+        }.done { (responseGenres) in
+            genresList = responseGenres
+            genresExpectation.fulfill()
+        }
         // then
         waitForExpectations(timeout: 1) { _ in
-            XCTAssertNotNil(genres)
-            XCTAssertEqual(genres?.count, 2)
+            XCTAssertNotNil(genresList)
+            XCTAssertEqual(genresList?.genres.count, 2)
         }
     }
     
-    func testGetErrorWhenMakeRequest() {
-        // given
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .mappingError)), coder: Coder.shared)
-        let errorExpectation = expectation(description: "Error expectation")
-        var error: Error?
-        // when
-        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: [Genre].self, completion: { response in
-            switch response {
-            case .failure(let responseError):
-                error = responseError
-                errorExpectation.fulfill()
-            default: break
-            }
-        })
-        // then
-        waitForExpectations(timeout: 1) { _ in
-            XCTAssertNotNil(error)
-        }
-    }
-    
-    func testGetErrorWhenMakeRequestAndSetWrongCastingType() {
-        // given
-        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
-        let errorExpectation = expectation(description: "Mapping error expectation")
-        var error: Error?
-        // when
-        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: String.self, completion: { response in
-            switch response {
-            case .failure(let responseError):
-                error = responseError
-                errorExpectation.fulfill()
-            default: break
-            }
-        })
-        // then
-        waitForExpectations(timeout: 1) { _ in
-            XCTAssertNotNil(error)
-        }
-    }
+//    func testGetErrorWhenMakeRequest() {
+//        // given
+//        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .mappingError)), coder: Coder.shared)
+//        let errorExpectation = expectation(description: "Error expectation")
+//        var error: Error?
+//        // when
+//        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: [Genre].self, completion: { response in
+//            switch response {
+//            case .failure(let responseError):
+//                error = responseError
+//                errorExpectation.fulfill()
+//            default: break
+//            }
+//        })
+//        // then
+//        waitForExpectations(timeout: 1) { _ in
+//            XCTAssertNotNil(error)
+//        }
+//    }
+//
+//    func testGetErrorWhenMakeRequestAndSetWrongCastingType() {
+//        // given
+//        let sut = NetworkingService(session: URLSessionMock(mockDataTask: MockDataTask.createTask(responseType: .genreData)), coder: Coder.shared)
+//        let errorExpectation = expectation(description: "Mapping error expectation")
+//        var error: Error?
+//        // when
+//        sut.makeRequst(URLRequest(url: URL(string: "https://www.test")!), castingType: String.self, completion: { response in
+//            switch response {
+//            case .failure(let responseError):
+//                error = responseError
+//                errorExpectation.fulfill()
+//            default: break
+//            }
+//        })
+//        // then
+//        waitForExpectations(timeout: 1) { _ in
+//            XCTAssertNotNil(error)
+//        }
+//    }
 }

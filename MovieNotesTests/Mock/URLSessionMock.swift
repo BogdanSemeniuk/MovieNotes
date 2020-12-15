@@ -7,7 +7,9 @@
 //
 
 import Foundation
+import PromiseKit
 @testable import MovieNotes
+
 
 final class URLSessionMock: NetworkSession {
     
@@ -18,9 +20,11 @@ final class URLSessionMock: NetworkSession {
     }
     
     func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        guard let path = Bundle.init(for: type(of: self)).path(forResource: "genres", ofType: nil), let data =
-            try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
         mockDataTask.completionHandler = completionHandler
         return mockDataTask
+    }
+    
+    public func dataTask(_: PMKNamespacer, with convertible: URLRequestConvertible) -> Promise<(data: Data, response: URLResponse)> {
+        return Promise { _ in mockDataTask.resume() }
     }
 }
