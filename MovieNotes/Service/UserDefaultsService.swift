@@ -27,4 +27,14 @@ final class UserDefaultsService {
         guard let data = userDefaults.data(forKey: genresKey), let genre = coder.map(data: data, type: [Genre].self)?.filter({ $0.id == id }).first else { return nil }
         return genre
     }
+    
+    func fetchGenres(completion: @escaping ([Genre]?, Error?) -> Void) {
+        DispatchQueue.global(qos: .background).async { [weak self] in
+            if let self = self, let data = self.userDefaults.data(forKey: self.genresKey), let genres = self.coder.map(data: data, type: [Genre].self) {
+                DispatchQueue.main.async { completion(genres, nil) }
+            } else {
+                DispatchQueue.main.async { completion(nil, CustomError.objectIsNotSaved) }
+            }
+        }
+    }
 }

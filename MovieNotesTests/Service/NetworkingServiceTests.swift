@@ -85,7 +85,7 @@ class NetworkingServiceTests: XCTestCase {
             moviesExpectation.fulfill()
         }
         // then
-        waitForExpectations(timeout: 1) { (responseMovies) in
+        waitForExpectations(timeout: 1) { (_) in
             XCTAssertNotNil(packageOfMovies)
             XCTAssertEqual(packageOfMovies?.results.count, 3)
         }

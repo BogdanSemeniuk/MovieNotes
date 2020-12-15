@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class DataManager {
     private var storage: UserDefaultsService
@@ -15,5 +16,12 @@ final class DataManager {
     init(storage: UserDefaultsService, networking: NetworkingService) {
         self.storage = storage
         self.networking = networking
+    }
+    
+    func fetchMovies(page: Int, moviesFilter: MoviesFilter) -> Promise<PackageOfMovies> {
+        return firstly {
+            
+            networking.fetchMovies(page: 1, moviesFilter: moviesFilter)
+        }
     }
 }

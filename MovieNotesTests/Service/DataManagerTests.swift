@@ -7,14 +7,21 @@
 //
 
 import XCTest
+import PromiseKit
 @testable import MovieNotes
 
 class DataManagerTests: XCTestCase {
 
     private var sut: DataManager!
+    private var storage: UserDefaultsService!
     
     override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let userDefaults = UserDefaults(suiteName: #file)!
+        userDefaults.removePersistentDomain(forName: #file)
+        let coder = Coder.shared
+        storage = UserDefaultsService(userDefaults: userDefaults, coder: coder)
+        sut = DataManager(storage: storage,
+                          networking: NetworkingService(session: URLSessionMock(responseType: .error), coder: coder))
     }
 
     override func tearDownWithError() throws {
@@ -22,9 +29,22 @@ class DataManagerTests: XCTestCase {
     }
     
     func testDataManagerExistAfterInit() {
-        //when
-        sut = DataManager(storage: UserDefaultsService(), networking: NetworkingService())
-        //then
         XCTAssertNotNil(sut)
+    }
+    
+    func testDataManagerSaveGenresWhenFetchMovies() {
+        // given
+        let genresExpectation = expectation(description: "Genre expectation")
+        var genre: Genre?
+        // when
+        _ = sut.fetchMovies(page: 1, moviesFilter: .popular).done { [weak self] responseMovies in
+            genre = self?.storage.fetchGenre(withId: 0)
+            genresExpectation.fulfill()
+        }
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(genre)
+            XCTAssertEqual(genre?.name, "Comedy")
+        }
     }
 }

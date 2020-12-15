@@ -38,6 +38,39 @@ class UserDefaultsServiceTests: XCTestCase {
         XCTAssert(fetchedGenre?.name == "Comedy", "Genre with name = Comedy must be saved")
     }
     
+    func testFetchGenresWhenGenresWereSavedBefore() {
+        // given
+        let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
+        let genresExpectation = expectation(description: "Genres expectation")
+        var storedGenres: [Genre]?
+        // when
+        sut.save(genres)
+        sut.fetchGenres(completion: { (responseGenres, _) in
+            storedGenres = responseGenres
+            genresExpectation.fulfill()
+        })
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(storedGenres)
+            XCTAssertEqual(storedGenres?.count, 2)
+        }
+    }
+    
+    func testGetErrorWhenFetchGenresButGenresWereNotSavedBefore() {
+        // given
+        let errorExpectation = expectation(description: "Error expectation")
+        var error: Error?
+        // when
+        sut.fetchGenres(completion: { (_, responseError) in
+            error = responseError
+            errorExpectation.fulfill()
+        })
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(error)
+        }
+    }
+    
     func testFetchedGenresEqualEmptyArrayIfGenresWerentSavedBefore() {
         // when
         let fetchedGenre = sut.fetchGenre(withId: 1)
