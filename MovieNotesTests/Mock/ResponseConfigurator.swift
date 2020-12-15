@@ -12,7 +12,7 @@ import PromiseKit
 class ResponseConfigurator {
     static func configure(with type: ResponseTypeMock) -> Promise<(data: Data, response: URLResponse)> {
         switch type {
-        case .genreData:
+        case .genresData:
             guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "genres", ofType: nil),
                   let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {

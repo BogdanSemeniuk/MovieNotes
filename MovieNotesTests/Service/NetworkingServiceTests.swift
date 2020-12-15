@@ -21,13 +21,13 @@ class NetworkingServiceTests: XCTestCase {
     }
     
     func testInitServiceIsNotNil() {
-        let sut = NetworkingService(session: URLSessionMock(responseType: .genreData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responseType: .genresData), coder: Coder.shared)
         XCTAssertNotNil(sut)
     }
     
     func testFetchGenres() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responseType: .genreData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responseType: .genresData), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
         var genresList: GenresList?
         // when
