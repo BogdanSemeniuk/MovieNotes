@@ -75,15 +75,16 @@ class NetworkingServiceTests: XCTestCase {
     }
     
     func testFetchMovies() {
+        // given
         let sut = NetworkingService(session: URLSessionMock(responseType: .moviesData), coder: Coder.shared)
         let moviesExpectation = expectation(description: "Movies expectation")
         var packageOfMovies: PackageOfMovies?
-        print(Endpoint.packageOfMovies(page: 1, moviesFilter: .upcoming).request.url!.absoluteString)
+        // when
         _ = sut.fetchMovies(page: 1, moviesFilter: .nowPlaying).done { (responseMovies) in
             packageOfMovies = responseMovies
             moviesExpectation.fulfill()
         }
-        
+        // then
         waitForExpectations(timeout: 1) { (responseMovies) in
             XCTAssertNotNil(packageOfMovies)
             XCTAssertEqual(packageOfMovies?.results.count, 3)
