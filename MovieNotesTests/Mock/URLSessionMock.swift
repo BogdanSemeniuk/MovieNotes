@@ -12,19 +12,13 @@ import PromiseKit
 
 
 final class URLSessionMock: NetworkSession {
+    private let responseType: ResponseTypeMock
     
-    private let mockDataTask: MockDataTask
-    
-    init(mockDataTask: MockDataTask) {
-        self.mockDataTask = mockDataTask
-    }
-    
-    func dataTask(with request: URLRequest, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> URLSessionDataTask {
-        mockDataTask.completionHandler = completionHandler
-        return mockDataTask
+    init(responseType: ResponseTypeMock) {
+        self.responseType = responseType
     }
     
     public func dataTask(_: PMKNamespacer, with convertible: URLRequestConvertible) -> Promise<(data: Data, response: URLResponse)> {
-        return Promise { _ in mockDataTask.resume() }
+        return ResponseConfigurator.configure(with: responseType)
     }
 }
