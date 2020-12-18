@@ -21,13 +21,13 @@ class NetworkingServiceTests: XCTestCase {
     }
     
     func testInitServiceIsNotNil() {
-        let sut = NetworkingService(session: URLSessionMock(responseType: .genresData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
         XCTAssertNotNil(sut)
     }
     
     func testFetchGenres() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responseType: .genresData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
         var genresList: GenresList?
         // when
@@ -44,7 +44,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testGetErrorWhenMakeRequest() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responseType: .error), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.error]), coder: Coder.shared)
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
@@ -60,7 +60,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testGetErrorWhenMakeRequestAndFetchWrongTypeOfResponse() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responseType: .stringData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.stringData]), coder: Coder.shared)
         let errorExpectation = expectation(description: "Mapping error expectation")
         var error: Error?
         // when
@@ -76,7 +76,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testFetchMovies() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responseType: .moviesData), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.moviesData]), coder: Coder.shared)
         let moviesExpectation = expectation(description: "Movies expectation")
         var packageOfMovies: PackageOfMovies?
         // when

@@ -12,13 +12,18 @@ import PromiseKit
 
 
 final class URLSessionMock: NetworkSession {
-    private let responseType: ResponseTypeMock
+    var requestsCount = 0
+    private let responses: [ResponseTypeMock]
     
-    init(responseType: ResponseTypeMock) {
-        self.responseType = responseType
+    init(responses: [ResponseTypeMock]) {
+        self.responses = responses
     }
     
     public func dataTask(_: PMKNamespacer, with convertible: URLRequestConvertible) -> Promise<(data: Data, response: URLResponse)> {
-        return ResponseConfigurator.configure(with: responseType)
+        defer {
+            requestsCount += 1
+        }
+        return ResponseConfigurator.configure(with: responses[requestsCount])
     }
 }
+

@@ -16,12 +16,6 @@ class DataManagerTests: XCTestCase {
     private var storage: UserDefaultsService!
     
     override func setUpWithError() throws {
-        let userDefaults = UserDefaults(suiteName: #file)!
-        userDefaults.removePersistentDomain(forName: #file)
-        let coder = Coder.shared
-        storage = UserDefaultsService(userDefaults: userDefaults, coder: coder)
-        sut = DataManager(storage: storage,
-                          networking: NetworkingService(session: URLSessionMock(responseType: .error), coder: coder))
     }
 
     override func tearDownWithError() throws {
@@ -29,22 +23,37 @@ class DataManagerTests: XCTestCase {
     }
     
     func testDataManagerExistAfterInit() {
+        configureSUT(withResponses: [.error])
         XCTAssertNotNil(sut)
     }
     
-    func testDataManagerSaveGenresWhenFetchMovies() {
+    func testDataManagerSaveGenresWhenSuccessInFetchingMovies() {
         // given
+        configureSUT(withResponses: [.genresData, .moviesData])
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
+        var package: PackageOfMovies?
         // when
         _ = sut.fetchMovies(page: 1, moviesFilter: .popular).done { [weak self] responseMovies in
+            package = responseMovies
             genre = self?.storage.fetchGenre(withId: 0)
             genresExpectation.fulfill()
         }
         // then
         waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(package)
+            XCTAssertEqual(package?.results.first?.id, 529203)
             XCTAssertNotNil(genre)
             XCTAssertEqual(genre?.name, "Comedy")
         }
+    }
+    
+    private func configureSUT(withResponses responses: [ResponseTypeMock]) {
+        let userDefaults = UserDefaults(suiteName: #file)!
+        userDefaults.removePersistentDomain(forName: #file)
+        let coder = Coder.shared
+        storage = UserDefaultsService(userDefaults: userDefaults, coder: coder)
+        sut = DataManager(storage: storage,
+                          networking: NetworkingService(session: URLSessionMock(responses: responses), coder: coder))
     }
 }

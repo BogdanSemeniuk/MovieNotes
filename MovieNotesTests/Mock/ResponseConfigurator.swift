@@ -16,24 +16,23 @@ class ResponseConfigurator {
             guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "genres", ofType: nil),
                   let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {
-                return $0.fulfill((data: data, response: URLResponseMock()))
+                $0.fulfill((data: data, response: URLResponseMock()))
             }
         case .stringData:
             return Promise {
-                return $0.fulfill((data: "Message".data(using: .utf8)!, response: URLResponseMock()))
+                $0.fulfill((data: "Message".data(using: .utf8)!, response: URLResponseMock()))
             }
         case .error:
             return Promise {
-                return $0.reject(MockError.serverError)
+                $0.reject(MockError.serverError)
             }
         case .moviesData:
             guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "movies", ofType: nil),
                   let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {
-                return $0.fulfill((data: data, response: URLResponseMock()))
+                $0.fulfill((data: data, response: URLResponseMock()))
             }
         }
-        
     }
 }
 

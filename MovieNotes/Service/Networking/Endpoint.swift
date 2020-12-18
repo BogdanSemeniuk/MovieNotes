@@ -24,10 +24,3 @@ extension Endpoint {
         }
     }
 }
-
-enum MoviesFilter: String {
-    case popular
-    case upcoming
-    case topRated = "top_rated"
-    case nowPlaying = "now_playing"
-}
