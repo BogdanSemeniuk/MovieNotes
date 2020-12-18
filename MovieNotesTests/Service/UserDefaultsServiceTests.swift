@@ -79,4 +79,16 @@ class UserDefaultsServiceTests: XCTestCase {
         // then
         XCTAssertNil(fetchedGenre, "Fetched genre must be nil")
     }
+    
+    func testFetchingGenresListThrowsErrorIfGenresWerentSavedBefore() throws {
+        var thrownError: Error?
+        
+        XCTAssertThrowsError(try sut.fetchGenresList()) {
+            thrownError = $0
+        }
+        XCTAssertTrue(thrownError is CustomError,
+            "Unexpected error type: \(type(of: thrownError))"
+        )
+        XCTAssertEqual(thrownError as? CustomError, .objectIsNotSaved)
+    }
 }
