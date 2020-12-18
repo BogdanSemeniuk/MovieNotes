@@ -7,34 +7,33 @@
 //
 
 import Foundation
+import PromiseKit
 
 final class UserDefaultsService {
     private var userDefaults: UserDefaults
     private var coder: Coder
-    private let genresKey = "genresKey"
+    private let genresListKey = "genresListKey"
     
     init(userDefaults: UserDefaults = .standard, coder: Coder = .shared) {
         self.userDefaults = userDefaults
         self.coder = coder
     }
     
-    func save(_ genres: [Genre]) {
+    func save(_ genres: GenresList) {
         let data = coder.toData(object: genres)
-        userDefaults.set(data, forKey: genresKey)
+        userDefaults.set(data, forKey: genresListKey)
     }
     
     func fetchGenre(withId id: Int) -> Genre? {
-        guard let data = userDefaults.data(forKey: genresKey), let genre = coder.map(data: data, type: [Genre].self)?.filter({ $0.id == id }).first else { return nil }
+        guard let data = userDefaults.data(forKey: genresListKey), let genre = coder.map(data: data, type: GenresList.self)?.genres.filter({ $0.id == id }).first else { return nil }
         return genre
     }
     
-    func fetchGenres(completion: @escaping ([Genre]?, Error?) -> Void) {
-        DispatchQueue.global(qos: .background).async { [weak self] in
-            if let self = self, let data = self.userDefaults.data(forKey: self.genresKey), let genres = self.coder.map(data: data, type: [Genre].self) {
-                DispatchQueue.main.async { completion(genres, nil) }
-            } else {
-                DispatchQueue.main.async { completion(nil, CustomError.objectIsNotSaved) }
-            }
+    func fetchGenresList() throws -> Promise<GenresList> {
+        if let data = self.userDefaults.data(forKey: self.genresListKey), let genres = self.coder.map(data: data, type: GenresList.self) {
+            return Promise { $0.resolve(genres, nil) }
+        } else {
+            throw(CustomError.objectIsNotSaved)
         }
     }
 }

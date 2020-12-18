@@ -20,8 +20,20 @@ final class DataManager {
     
     func fetchMovies(page: Int, moviesFilter: MoviesFilter) -> Promise<PackageOfMovies> {
         return firstly {
-            
-            networking.fetchMovies(page: 1, moviesFilter: moviesFilter)
+            self.fetchAndSaveGenresList()
+        }.then { _ in
+            self.networking.fetchMovies(page: page, moviesFilter: moviesFilter)
+        }
+    }
+    
+    private func fetchAndSaveGenresList() -> Promise<GenresList> {
+        return firstly {
+            try storage.fetchGenresList()
+        }.recover { _ in
+            self.networking.fetchGanres()
+        }.get { genreList in
+            guard (try? self.storage.fetchGenresList()) == nil else { return }
+            self.storage.save(genreList)
         }
     }
 }

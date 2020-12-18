@@ -7,6 +7,7 @@
 //
 
 import XCTest
+import PromiseKit
 @testable import MovieNotes
 
 class UserDefaultsServiceTests: XCTestCase {
@@ -29,9 +30,9 @@ class UserDefaultsServiceTests: XCTestCase {
     
     func testSavedGenresEqualsFetchedGenres() {
         // given
-        let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
+        let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         // when
-        sut.save(genres)
+        sut.save(genresList)
         let fetchedGenre = sut.fetchGenre(withId: 1)
         // then
         XCTAssert(fetchedGenre?.id == 1, "Genre with id = 1 must be saved")
@@ -40,15 +41,17 @@ class UserDefaultsServiceTests: XCTestCase {
     
     func testFetchGenresWhenGenresWereSavedBefore() {
         // given
-        let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
+        let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let genresExpectation = expectation(description: "Genres expectation")
         var storedGenres: [Genre]?
         // when
-        sut.save(genres)
-        sut.fetchGenres(completion: { (responseGenres, _) in
-            storedGenres = responseGenres
+        sut.save(genresList)
+        _ = firstly {
+            try sut.fetchGenresList()
+        }.done { responseGenres in
+            storedGenres = responseGenres.genres
             genresExpectation.fulfill()
-        })
+        }
         // then
         waitForExpectations(timeout: 1) { (_) in
             XCTAssertNotNil(storedGenres)
@@ -61,10 +64,12 @@ class UserDefaultsServiceTests: XCTestCase {
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
-        sut.fetchGenres(completion: { (_, responseError) in
+        _ = firstly {
+            try sut.fetchGenresList()
+        }.catch { responseError in
             error = responseError
             errorExpectation.fulfill()
-        })
+        }
         // then
         waitForExpectations(timeout: 1) { (_) in
             XCTAssertNotNil(error)

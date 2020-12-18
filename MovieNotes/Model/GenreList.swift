@@ -8,6 +8,6 @@
 
 import Foundation
 
-struct GenresList: Decodable {
+struct GenresList: Codable {
     var genres: [Genre]
 }
