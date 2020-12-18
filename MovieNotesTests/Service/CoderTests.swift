@@ -16,10 +16,6 @@ class CoderTests: XCTestCase {
     override func setUpWithError() throws {
         sut = Coder.shared
     }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
     
     func testInitCoderIsNotNil() {
         XCTAssertNotNil(sut)

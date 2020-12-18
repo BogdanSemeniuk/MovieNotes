@@ -20,9 +20,6 @@ class UserDefaultsServiceTests: XCTestCase {
         let coder = Coder.shared
         sut = UserDefaultsService(userDefaults: userDefaults, coder: coder)
     }
-
-    override func tearDownWithError() throws {
-    }
     
     func testInitUserDefaultsServiceExistsUserDefaultsService() {
         XCTAssertNotNil(sut)
