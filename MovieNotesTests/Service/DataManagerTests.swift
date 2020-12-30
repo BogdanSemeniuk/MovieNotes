@@ -11,7 +11,6 @@ import PromiseKit
 @testable import MovieNotes
 
 class DataManagerTests: XCTestCase {
-
     private var sut: DataManager!
     private var storage: UserDefaultsService!
     private var urlSessionMock: URLSessionMock!
@@ -21,7 +20,7 @@ class DataManagerTests: XCTestCase {
         XCTAssertNotNil(sut)
     }
     
-    func testSaveGenresWhenSuccessInFetchingMovies() {
+    func testSaveGenresWhenSucceedInFetchingMovies() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
         let genresExpectation = expectation(description: "Genre expectation")
