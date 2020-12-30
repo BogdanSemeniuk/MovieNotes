@@ -11,16 +11,27 @@ import Foundation
 enum Endpoint {
     case ganresList
     case packageOfMovies(page: Int, moviesFilter: MoviesFilter)
+    case movieDetails(id: Int)
+    case movieTrailers(id: Int)
+    case movieImages(id: Int)
 }
 
 extension Endpoint {
-    static let apiKey = "85cfecbf4366c6b833864140f4bc428c"
-    
     var request: URLRequest {
+        var url: URL!
         switch self {
-        case .ganresList: return URLRequest(url: URL(string: "https://api.themoviedb.org/3/genre/movie/list?api_key=\(Endpoint.apiKey)&language=en-US")!)
+        case .ganresList:
+            url = Helper.baseURL.appendingPathComponent("genre/movie/list").addApiKeyAndLanguage()
         case let .packageOfMovies(page, moviesFilter):
-            return URLRequest(url: URL(string: "https://api.themoviedb.org/3/movie/\(moviesFilter.rawValue)?api_key=\(Endpoint.apiKey)&language=en-US&page=\(page)&region=UA")!)
+            url = Helper.baseURL.appendingPathComponent("movie/\(moviesFilter.rawValue)").addApiKeyAndLanguage()
+                .appending("page", value: String(page)).appending("region", value: "UA")
+        case let .movieDetails(id):
+            url = Helper.baseURL.appendingPathComponent("movie/\(id)").addApiKeyAndLanguage().appending("append_to_response", value: "credits")
+        case let .movieTrailers(id):
+            url = Helper.baseURL.appendingPathComponent("movie/\(id)/videos").addApiKeyAndLanguage()
+        case let .movieImages(id):
+            url = Helper.baseURL.appendingPathComponent("movie/\(id)/images").addApiKeyAndLanguage()
         }
+        return URLRequest(url: url)
     }
 }
