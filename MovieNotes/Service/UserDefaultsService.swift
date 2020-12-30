@@ -6,7 +6,6 @@
 //  Copyright © 2020 Богдан Семенюк. All rights reserved.
 //
 
-import Foundation
 import PromiseKit
 
 final class UserDefaultsService {
