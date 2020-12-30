@@ -81,4 +81,21 @@ class NetworkingServiceTests: XCTestCase {
             XCTAssertEqual(packageOfMovies?.results.count, 3)
         }
     }
+    
+    func testFetchMovieDetails() {
+        // given
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieDetailsData]), coder: Coder.shared)
+        let movieDetailsExpectation = expectation(description: "Movie details expectation")
+        var movieDetails: Movie?
+        // when
+        _ = sut.fetchMovieDetails(id: 1).done({ (responseMovieDetails) in
+            movieDetails = responseMovieDetails
+            movieDetailsExpectation.fulfill()
+        })
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(movieDetails)
+            XCTAssertEqual(movieDetails?.id, 652004)
+            XCTAssertEqual(movieDetails?.title, "The Wolf of Snow Hollow")
+        }
+    }
 }

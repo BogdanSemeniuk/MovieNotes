@@ -32,4 +32,12 @@ final class NetworkingService {
             return self?.coder.map(data: $0.data, type: PackageOfMovies.self)
         }
     }
+    
+    func fetchMovieDetails(id: Int) -> Promise<Movie> {
+        return firstly {
+            session.dataTask(.promise, with: Endpoint.movieDetails(id: id).request)
+        }.compactMap { [weak self] in
+            return self?.coder.map(data: $0.data, type: Movie.self)
+        }
+    }
 }
