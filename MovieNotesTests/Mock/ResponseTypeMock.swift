@@ -14,4 +14,5 @@ enum ResponseTypeMock {
     case error
     case moviesData
     case movieDetailsData
+    case movieImagesData
 }

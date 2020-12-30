@@ -92,10 +92,28 @@ class NetworkingServiceTests: XCTestCase {
             movieDetails = responseMovieDetails
             movieDetailsExpectation.fulfill()
         })
+        // then
         waitForExpectations(timeout: 1) { (_) in
             XCTAssertNotNil(movieDetails)
             XCTAssertEqual(movieDetails?.id, 652004)
             XCTAssertEqual(movieDetails?.title, "The Wolf of Snow Hollow")
+        }
+    }
+    
+    func testFetchImagesForMovie() {
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieImagesData]), coder: Coder.shared)
+        let movieImagesExpectation = expectation(description: "Movie images expectation")
+        var images: Images?
+        // when
+        _ = sut.fetchImages(id: 1).done({ responseImages in
+            images = responseImages
+            movieImagesExpectation.fulfill()
+        })
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(images)
+            XCTAssertEqual(images?.backdrops.first?.filePath, "/gbdiI8tzptuOcGp4anJeZAiUzA1.jpg")
+            XCTAssertEqual(images?.posters.first?.filePath, "/nXeTSXR5ryFwxrlpmD9hhXJTAuc.jpg")
         }
     }
 }

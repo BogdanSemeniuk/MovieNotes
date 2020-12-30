@@ -12,10 +12,8 @@ class ResponseConfigurator {
     static func configure(with type: ResponseTypeMock) -> Promise<(data: Data, response: URLResponse)> {
         switch type {
         case .genresData:
-            guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "genres", ofType: nil),
-                  let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {
-                $0.fulfill((data: data, response: URLResponseMock()))
+                $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "genres"), response: URLResponseMock()))
             }
         case .stringData:
             return Promise {
@@ -26,18 +24,17 @@ class ResponseConfigurator {
                 $0.reject(MockError.serverError)
             }
         case .moviesData:
-            guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "movies", ofType: nil),
-                  let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {
-                $0.fulfill((data: data, response: URLResponseMock()))
+                $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "movies"), response: URLResponseMock()))
             }
         case .movieDetailsData:
-            guard let path = Bundle.init(for: ResponseConfigurator.self).path(forResource: "movieDetails", ofType: nil),
-                  let data = try? Data(contentsOf: URL(fileURLWithPath: path)) else { fatalError("Can't find genre json file") }
             return Promise {
-                $0.fulfill((data: data, response: URLResponseMock()))
+                $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "movieDetails"), response: URLResponseMock()))
+            }
+        case .movieImagesData:
+            return Promise {
+                $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "images"), response: URLResponseMock()))
             }
         }
     }
 }
-
