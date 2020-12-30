@@ -35,6 +35,10 @@ class ResponseConfigurator {
             return Promise {
                 $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "images"), response: URLResponseMock()))
             }
+        case .movieTrailersData:
+            return Promise {
+                $0.fulfill((data: Data(bundle: Bundle.init(for: ResponseConfigurator.self), fileName: "trailers"), response: URLResponseMock()))
+            }
         }
     }
 }

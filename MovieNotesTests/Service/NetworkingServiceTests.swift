@@ -101,6 +101,7 @@ class NetworkingServiceTests: XCTestCase {
     }
     
     func testFetchImagesForMovie() {
+        // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.movieImagesData]), coder: Coder.shared)
         let movieImagesExpectation = expectation(description: "Movie images expectation")
         var images: Images?
@@ -114,6 +115,23 @@ class NetworkingServiceTests: XCTestCase {
             XCTAssertNotNil(images)
             XCTAssertEqual(images?.backdrops.first?.filePath, "/gbdiI8tzptuOcGp4anJeZAiUzA1.jpg")
             XCTAssertEqual(images?.posters.first?.filePath, "/nXeTSXR5ryFwxrlpmD9hhXJTAuc.jpg")
+        }
+    }
+    
+    func testFetchTrailers() {
+        // given
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieTrailersData]), coder: Coder.shared)
+        let movieTrailersExpectation = expectation(description: "Movie trailers expectation")
+        var trailers: Videos?
+        // when
+        _ = sut.fetchTrailers(id: 1).done({ responseTrailers in
+            trailers = responseTrailers
+            movieTrailersExpectation.fulfill()
+        })
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(trailers)
+            XCTAssertEqual(trailers?.results.first?.name, "THE WOLF OF SNOW HOLLOW Official Trailer (2020)")
         }
     }
 }

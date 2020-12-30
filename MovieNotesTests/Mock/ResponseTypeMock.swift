@@ -15,4 +15,5 @@ enum ResponseTypeMock {
     case moviesData
     case movieDetailsData
     case movieImagesData
+    case movieTrailersData
 }

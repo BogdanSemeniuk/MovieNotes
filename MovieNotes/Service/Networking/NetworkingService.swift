@@ -48,4 +48,12 @@ final class NetworkingService {
             return self?.coder.map(data: $0.data, type: Images.self)
         }
     }
+    
+    func fetchTrailers(id: Int) -> Promise<Videos> {
+        return firstly {
+            session.dataTask(.promise, with: Endpoint.movieTrailers(id: id).request)
+        }.compactMap { [weak self] in
+            return self?.coder.map(data: $0.data, type: Videos.self)
+        }
+    }
 }
