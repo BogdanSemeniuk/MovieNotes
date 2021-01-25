@@ -11,6 +11,7 @@
 		D4FE5C9663AB27325F9C91F3 /* Pods_MovieNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0B39842731B74FD584C424 /* Pods_MovieNotesTests.framework */; };
 		F505613025BED54300A92CCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505612F25BED54300A92CCE /* Router.swift */; };
 		F505613425BED55700A92CCE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505613325BED55700A92CCE /* Coordinator.swift */; };
+		F505614925BED7EA00A92CCE /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505614825BED7EA00A92CCE /* RouterTests.swift */; };
 		F52124602555A0D60030DFD9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521245F2555A0D60030DFD9 /* Country.swift */; };
 		F52124642555A19C0030DFD9 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124632555A19C0030DFD9 /* Worker.swift */; };
 		F52124682555A1AD0030DFD9 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124672555A1AD0030DFD9 /* Actor.swift */; };
@@ -75,6 +76,7 @@
 		B91E8455D9874E5C7A9E70AA /* Pods-MovieNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieNotes.debug.xcconfig"; path = "Target Support Files/Pods-MovieNotes/Pods-MovieNotes.debug.xcconfig"; sourceTree = "<group>"; };
 		F505612F25BED54300A92CCE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		F505613325BED55700A92CCE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		F505614825BED7EA00A92CCE /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
 		F521245F2555A0D60030DFD9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		F52124632555A19C0030DFD9 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		F52124672555A1AD0030DFD9 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -179,6 +181,14 @@
 			path = Routers;
 			sourceTree = "<group>";
 		};
+		F505614125BED7B500A92CCE /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				F505614825BED7EA00A92CCE /* RouterTests.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
 		F55A982D259CA98600402020 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,6 +264,7 @@
 				F55A9801259C818100402020 /* movieDetails */,
 				F55A9813259C8A7900402020 /* images */,
 				F55A981D259C90A600402020 /* trailers */,
+				F505614125BED7B500A92CCE /* Routers */,
 				F55D8B8D2589092100BD6199 /* movies */,
 				F55A982D259CA98600402020 /* Model */,
 				F5C54FBB250A563C00C2C3A8 /* Info.plist */,
@@ -565,6 +576,7 @@
 				F55D8B762588EA7D00BD6199 /* MockError.swift in Sources */,
 				F55D8B7A2588EB7900BD6199 /* ResponseTypeMock.swift in Sources */,
 				F5DA5A14250BA1530077BA59 /* CoderTests.swift in Sources */,
+				F505614925BED7EA00A92CCE /* RouterTests.swift in Sources */,
 				F55D8B6E2588E5A000BD6199 /* ResponseConfigurator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
