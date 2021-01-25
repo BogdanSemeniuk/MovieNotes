@@ -151,6 +151,14 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		F505612A25BED38A00A92CCE /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				F55A97FD259C763A00402020 /* URL+extension.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
 		F55A982D259CA98600402020 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -212,7 +220,7 @@
 				F5C54FC1250A620F00C2C3A8 /* Model */,
 				F5C54FC4250A623500C2C3A8 /* Suporting files */,
 				F5DA5A16250BA1D70077BA59 /* Service */,
-				F55A97FD259C763A00402020 /* URL+extension.swift */,
+				F505612A25BED38A00A92CCE /* Extensions */,
 			);
 			path = MovieNotes;
 			sourceTree = "<group>";
