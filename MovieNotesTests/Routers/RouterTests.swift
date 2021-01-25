@@ -11,10 +11,10 @@ import XCTest
 
 class RouterTests: XCTestCase {
 
-    var mockRouter: MockRouter!
+    var mockRouter: RouterMock!
     
     override func setUpWithError() throws {
-        mockRouter = MockRouter()
+        mockRouter = RouterMock()
     }
 
     override func tearDownWithError() throws {
@@ -32,20 +32,6 @@ class RouterTests: XCTestCase {
         // when
         mockRouter.show(UIViewController(), animated: true)
         // then
-        XCTAssertTrue(mockRouter.funcShowWithOnDismissedWasCalled)
-    }
-}
-
-extension RouterTests {
-    final class MockRouter: Router {
-        private(set) var onDismissed: (() -> Void)?
-        private(set) var funcShowWithOnDismissedWasCalled = false
-        
-        func show(_ viewController: UIViewController, animated: Bool, onDismissed: (() -> Void)?) {
-            self.onDismissed = onDismissed
-            funcShowWithOnDismissedWasCalled.toggle()
-        }
-        
-        func hide(animated: Bool) {}
+        XCTAssertTrue(mockRouter.showWithOnDismissedWasCalled)
     }
 }

@@ -12,6 +12,12 @@
 		F505613025BED54300A92CCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505612F25BED54300A92CCE /* Router.swift */; };
 		F505613425BED55700A92CCE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505613325BED55700A92CCE /* Coordinator.swift */; };
 		F505614925BED7EA00A92CCE /* RouterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505614825BED7EA00A92CCE /* RouterTests.swift */; };
+		F505615325BEF25D00A92CCE /* CoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505615225BEF25D00A92CCE /* CoordinatorTests.swift */; };
+		F505615E25BEF6B200A92CCE /* RouterMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505615D25BEF6B200A92CCE /* RouterMock.swift */; };
+		F505616425BEF74300A92CCE /* CoordinatorMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505616325BEF74300A92CCE /* CoordinatorMock.swift */; };
+		F505616A25BF127D00A92CCE /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505616925BF127D00A92CCE /* MoviesListViewController.swift */; };
+		F505616E25BF12B300A92CCE /* MoviesList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F505616D25BF12B300A92CCE /* MoviesList.storyboard */; };
+		F505617225BF15D800A92CCE /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505617125BF15D800A92CCE /* Storyboarded.swift */; };
 		F52124602555A0D60030DFD9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521245F2555A0D60030DFD9 /* Country.swift */; };
 		F52124642555A19C0030DFD9 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124632555A19C0030DFD9 /* Worker.swift */; };
 		F52124682555A1AD0030DFD9 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124672555A1AD0030DFD9 /* Actor.swift */; };
@@ -77,6 +83,12 @@
 		F505612F25BED54300A92CCE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
 		F505613325BED55700A92CCE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F505614825BED7EA00A92CCE /* RouterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterTests.swift; sourceTree = "<group>"; };
+		F505615225BEF25D00A92CCE /* CoordinatorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorTests.swift; sourceTree = "<group>"; };
+		F505615D25BEF6B200A92CCE /* RouterMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouterMock.swift; sourceTree = "<group>"; };
+		F505616325BEF74300A92CCE /* CoordinatorMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorMock.swift; sourceTree = "<group>"; };
+		F505616925BF127D00A92CCE /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
+		F505616D25BF12B300A92CCE /* MoviesList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoviesList.storyboard; sourceTree = "<group>"; };
+		F505617125BF15D800A92CCE /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
 		F521245F2555A0D60030DFD9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		F52124632555A19C0030DFD9 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		F52124672555A1AD0030DFD9 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -189,6 +201,14 @@
 			path = Routers;
 			sourceTree = "<group>";
 		};
+		F505615625BEF26800A92CCE /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				F505615225BEF25D00A92CCE /* CoordinatorTests.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
 		F55A982D259CA98600402020 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -217,6 +237,8 @@
 				F55D8B752588EA7D00BD6199 /* MockError.swift */,
 				F55D8B712588E7B300BD6199 /* URLResponseMock.swift */,
 				F55D8B792588EB7900BD6199 /* ResponseTypeMock.swift */,
+				F505615D25BEF6B200A92CCE /* RouterMock.swift */,
+				F505616325BEF74300A92CCE /* CoordinatorMock.swift */,
 			);
 			path = Mock;
 			sourceTree = "<group>";
@@ -264,8 +286,9 @@
 				F55A9801259C818100402020 /* movieDetails */,
 				F55A9813259C8A7900402020 /* images */,
 				F55A981D259C90A600402020 /* trailers */,
-				F505614125BED7B500A92CCE /* Routers */,
 				F55D8B8D2589092100BD6199 /* movies */,
+				F505615625BEF26800A92CCE /* Coordinators */,
+				F505614125BED7B500A92CCE /* Routers */,
 				F55A982D259CA98600402020 /* Model */,
 				F5C54FBB250A563C00C2C3A8 /* Info.plist */,
 				F5DA5A15250BA1610077BA59 /* Service */,
@@ -297,6 +320,8 @@
 		F5C54FC2250A621700C2C3A8 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				F505616925BF127D00A92CCE /* MoviesListViewController.swift */,
+				F505616D25BF12B300A92CCE /* MoviesList.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -325,6 +350,7 @@
 			children = (
 				F5733216250F8A96002FB2DD /* CustomError.swift */,
 				F5C54FC9250A7A7F00C2C3A8 /* Helper.swift */,
+				F505617125BF15D800A92CCE /* Storyboarded.swift */,
 			);
 			path = Common;
 			sourceTree = "<group>";
@@ -444,6 +470,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F505616E25BF12B300A92CCE /* MoviesList.storyboard in Resources */,
 				F5A3189D24EFCDFB00F7CE77 /* LaunchScreen.storyboard in Resources */,
 				F5A3189A24EFCDFB00F7CE77 /* Assets.xcassets in Resources */,
 			);
@@ -555,6 +582,8 @@
 				F52124642555A19C0030DFD9 /* Worker.swift in Sources */,
 				F55D8B4C2588AEF400BD6199 /* Endpoint.swift in Sources */,
 				F505613425BED55700A92CCE /* Coordinator.swift in Sources */,
+				F505617225BF15D800A92CCE /* Storyboarded.swift in Sources */,
+				F505616A25BF127D00A92CCE /* MoviesListViewController.swift in Sources */,
 				F5C54FCA250A7A7F00C2C3A8 /* Helper.swift in Sources */,
 				F55A981A259C8F5500402020 /* Videos.swift in Sources */,
 			);
@@ -570,14 +599,17 @@
 				F55D8B722588E7B300BD6199 /* URLResponseMock.swift in Sources */,
 				F55A982A259CA94200402020 /* MovieDetailsTests.swift in Sources */,
 				F5733212250F74FA002FB2DD /* URLSessionMock.swift in Sources */,
+				F505615E25BEF6B200A92CCE /* RouterMock.swift in Sources */,
 				F55A9810259C88C400402020 /* Data+extension.swift in Sources */,
 				F5DA5A10250B99C80077BA59 /* UserDefaultsServiceTests.swift in Sources */,
 				F573320B250F6F6B002FB2DD /* NetworkingServiceTests.swift in Sources */,
 				F55D8B762588EA7D00BD6199 /* MockError.swift in Sources */,
 				F55D8B7A2588EB7900BD6199 /* ResponseTypeMock.swift in Sources */,
+				F505615325BEF25D00A92CCE /* CoordinatorTests.swift in Sources */,
 				F5DA5A14250BA1530077BA59 /* CoderTests.swift in Sources */,
 				F505614925BED7EA00A92CCE /* RouterTests.swift in Sources */,
 				F55D8B6E2588E5A000BD6199 /* ResponseConfigurator.swift in Sources */,
+				F505616425BEF74300A92CCE /* CoordinatorMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
