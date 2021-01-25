@@ -31,6 +31,8 @@
 		F53231A225BF1DB900340E3D /* MoviesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53231A125BF1DB900340E3D /* MoviesRouter.swift */; };
 		F53231A625BF261A00340E3D /* ActivitiesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53231A525BF261A00340E3D /* ActivitiesViewController.swift */; };
 		F53231AA25BF265200340E3D /* Activities.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F53231A925BF265200340E3D /* Activities.storyboard */; };
+		F53231AE25BF26BF00340E3D /* ActivitiesRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53231AD25BF26BF00340E3D /* ActivitiesRouter.swift */; };
+		F53231B225BF26D700340E3D /* ActivitiesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F53231B125BF26D700340E3D /* ActivitiesCoordinator.swift */; };
 		F542114F250FA57B00D6ACFE /* CustomErrorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F542114E250FA57B00D6ACFE /* CustomErrorTests.swift */; };
 		F55A97FE259C763A00402020 /* URL+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55A97FD259C763A00402020 /* URL+extension.swift */; };
 		F55A9802259C818100402020 /* movieDetails in Resources */ = {isa = PBXBuildFile; fileRef = F55A9801259C818100402020 /* movieDetails */; };
@@ -106,6 +108,8 @@
 		F53231A125BF1DB900340E3D /* MoviesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesRouter.swift; sourceTree = "<group>"; };
 		F53231A525BF261A00340E3D /* ActivitiesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesViewController.swift; sourceTree = "<group>"; };
 		F53231A925BF265200340E3D /* Activities.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Activities.storyboard; sourceTree = "<group>"; };
+		F53231AD25BF26BF00340E3D /* ActivitiesRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesRouter.swift; sourceTree = "<group>"; };
+		F53231B125BF26D700340E3D /* ActivitiesCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivitiesCoordinator.swift; sourceTree = "<group>"; };
 		F542114E250FA57B00D6ACFE /* CustomErrorTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomErrorTests.swift; sourceTree = "<group>"; };
 		F55A97FD259C763A00402020 /* URL+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URL+extension.swift"; sourceTree = "<group>"; };
 		F55A9801259C818100402020 /* movieDetails */ = {isa = PBXFileReference; lastKnownFileType = text; path = movieDetails; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
@@ -190,6 +194,7 @@
 			children = (
 				F505613325BED55700A92CCE /* Coordinator.swift */,
 				F532319D25BF1CDE00340E3D /* MoviesCoordinator.swift */,
+				F53231B125BF26D700340E3D /* ActivitiesCoordinator.swift */,
 			);
 			path = Coordinators;
 			sourceTree = "<group>";
@@ -199,6 +204,7 @@
 			children = (
 				F505612F25BED54300A92CCE /* Router.swift */,
 				F53231A125BF1DB900340E3D /* MoviesRouter.swift */,
+				F53231AD25BF26BF00340E3D /* ActivitiesRouter.swift */,
 			);
 			path = Routers;
 			sourceTree = "<group>";
@@ -575,6 +581,7 @@
 				F52124702555A2210030DFD9 /* Movie.swift in Sources */,
 				F521247A2555AA830030DFD9 /* DataManager.swift in Sources */,
 				F5C54FC6250A756800C2C3A8 /* Genre.swift in Sources */,
+				F53231AE25BF26BF00340E3D /* ActivitiesRouter.swift in Sources */,
 				F5DA5A18250BA1E70077BA59 /* Coder.swift in Sources */,
 				F5A3189124EFCDF700F7CE77 /* AppDelegate.swift in Sources */,
 				F532319E25BF1CDE00340E3D /* MoviesCoordinator.swift in Sources */,
@@ -586,6 +593,7 @@
 				F5DA5A12250B9A560077BA59 /* UserDefaultsService.swift in Sources */,
 				F55A97FE259C763A00402020 /* URL+extension.swift in Sources */,
 				F55A9826259CA80400402020 /* MovieDetails.swift in Sources */,
+				F53231B225BF26D700340E3D /* ActivitiesCoordinator.swift in Sources */,
 				F5A3189324EFCDF700F7CE77 /* SceneDelegate.swift in Sources */,
 				F55D8B822588F8E800BD6199 /* PackageOfMovies.swift in Sources */,
 				F5733218250F8B0F002FB2DD /* CustomError.swift in Sources */,
