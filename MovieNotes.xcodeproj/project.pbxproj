@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		A4BC7FB97CF483A793D267CD /* Pods_MovieNotes.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0EED608730FB630FB3D5B6A8 /* Pods_MovieNotes.framework */; };
 		D4FE5C9663AB27325F9C91F3 /* Pods_MovieNotesTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8E0B39842731B74FD584C424 /* Pods_MovieNotesTests.framework */; };
+		F505613025BED54300A92CCE /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505612F25BED54300A92CCE /* Router.swift */; };
+		F505613425BED55700A92CCE /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505613325BED55700A92CCE /* Coordinator.swift */; };
 		F52124602555A0D60030DFD9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521245F2555A0D60030DFD9 /* Country.swift */; };
 		F52124642555A19C0030DFD9 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124632555A19C0030DFD9 /* Worker.swift */; };
 		F52124682555A1AD0030DFD9 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124672555A1AD0030DFD9 /* Actor.swift */; };
@@ -71,6 +73,8 @@
 		897F19677FCD322C22B147B0 /* Pods-MovieNotes.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieNotes.release.xcconfig"; path = "Target Support Files/Pods-MovieNotes/Pods-MovieNotes.release.xcconfig"; sourceTree = "<group>"; };
 		8E0B39842731B74FD584C424 /* Pods_MovieNotesTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MovieNotesTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B91E8455D9874E5C7A9E70AA /* Pods-MovieNotes.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MovieNotes.debug.xcconfig"; path = "Target Support Files/Pods-MovieNotes/Pods-MovieNotes.debug.xcconfig"; sourceTree = "<group>"; };
+		F505612F25BED54300A92CCE /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		F505613325BED55700A92CCE /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
 		F521245F2555A0D60030DFD9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		F52124632555A19C0030DFD9 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		F52124672555A1AD0030DFD9 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -159,6 +163,22 @@
 			path = Extensions;
 			sourceTree = "<group>";
 		};
+		F505613725BED57F00A92CCE /* Coordinators */ = {
+			isa = PBXGroup;
+			children = (
+				F505613325BED55700A92CCE /* Coordinator.swift */,
+			);
+			path = Coordinators;
+			sourceTree = "<group>";
+		};
+		F505613A25BED58E00A92CCE /* Routers */ = {
+			isa = PBXGroup;
+			children = (
+				F505612F25BED54300A92CCE /* Router.swift */,
+			);
+			path = Routers;
+			sourceTree = "<group>";
+		};
 		F55A982D259CA98600402020 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +241,8 @@
 				F5C54FC4250A623500C2C3A8 /* Suporting files */,
 				F5DA5A16250BA1D70077BA59 /* Service */,
 				F505612A25BED38A00A92CCE /* Extensions */,
+				F505613A25BED58E00A92CCE /* Routers */,
+				F505613725BED57F00A92CCE /* Coordinators */,
 			);
 			path = MovieNotes;
 			sourceTree = "<group>";
@@ -515,11 +537,13 @@
 				F55D8B822588F8E800BD6199 /* PackageOfMovies.swift in Sources */,
 				F5733218250F8B0F002FB2DD /* CustomError.swift in Sources */,
 				F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */,
+				F505613025BED54300A92CCE /* Router.swift in Sources */,
 				F5733210250F7409002FB2DD /* NetworkingSession.swift in Sources */,
 				F52124602555A0D60030DFD9 /* Country.swift in Sources */,
 				F5243648258CED920047A13D /* MoviesFilter.swift in Sources */,
 				F52124642555A19C0030DFD9 /* Worker.swift in Sources */,
 				F55D8B4C2588AEF400BD6199 /* Endpoint.swift in Sources */,
+				F505613425BED55700A92CCE /* Coordinator.swift in Sources */,
 				F5C54FCA250A7A7F00C2C3A8 /* Helper.swift in Sources */,
 				F55A981A259C8F5500402020 /* Videos.swift in Sources */,
 			);
