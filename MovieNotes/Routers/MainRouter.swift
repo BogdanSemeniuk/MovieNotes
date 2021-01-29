@@ -20,7 +20,5 @@ final class MainRouter: Router {
         window.makeKeyAndVisible()
     }
     
-    func hide(animated: Bool) {
-        
-    }
+    func hide(animated: Bool) {}
 }
