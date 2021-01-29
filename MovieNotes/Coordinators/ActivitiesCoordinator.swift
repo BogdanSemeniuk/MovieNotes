@@ -19,7 +19,7 @@ final class ActivitiesCoordinator: Coordinator {
     func show(animated: Bool, onDismissed: (() -> Void)?) {
         let vc = ActivitiesViewController.instantiateFromStoryboard()
         vc.coordinator = self
-        router.show(vc, animated: false, onDismissed: onDismissed)
+        router.show(vc, animated: animated, onDismissed: onDismissed)
     }
 }
 

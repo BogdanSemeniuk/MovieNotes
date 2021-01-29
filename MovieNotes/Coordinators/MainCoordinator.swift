@@ -30,5 +30,14 @@ final class MainCoordinator: Coordinator {
         tabBarController.viewControllers = [moviesNavigationController, activitiesNavigationController]
         
         router.show(tabBarController, animated: true)
+        
+        let moviesRouter = MoviesRouter(navigationController: moviesNavigationController)
+        let moviesCoordinator = MoviesCoordinator(router: moviesRouter)
+        
+        let activitiesRouter = ActivitiesRouter(navigationController: activitiesNavigationController)
+        let activitiesCoordinator = ActivitiesCoordinator(router: activitiesRouter)
+        
+        showChild(moviesCoordinator, animated: false)
+        showChild(activitiesCoordinator, animated: false)
     }
 }
