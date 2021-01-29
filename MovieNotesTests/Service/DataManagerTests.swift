@@ -15,12 +15,12 @@ class DataManagerTests: XCTestCase {
     private var storage: UserDefaultsService!
     private var urlSessionMock: URLSessionMock!
     
-    func testDataManagerExistAfterInit() {
+    func testDataManager_whenInit_shouldNotBeNil() {
         configureSUT(withResponses: [.error])
         XCTAssertNotNil(sut)
     }
     
-    func testSaveGenresWhenSucceedInFetchingMovies() {
+    func testDataManager_whenFetchMoviesWithSuccessResult_genresShouldBeSavedToStorageAndPackageOfMoviesShouldBeFetched() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
         let genresExpectation = expectation(description: "Genre expectation")
@@ -41,7 +41,7 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    func testSaveGenresWhenFailInFetchingMovies() {
+    func testDataManager_whenFetchMoviesWithFailureResultButFetchGenresWithSuccessResult_genresShouldBeSavedToStorage() {
         // given
         configureSUT(withResponses: [.genresData, .error])
         let genresExpectation = expectation(description: "Genre expectation")
@@ -58,7 +58,7 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    func testIfGenresWereStoredBeforeGetGenresFromStorageWhenFetchingMovies() {
+    func testDataManager_whenFetchMoviesAndGenresWereStoredBefore_shouldFetchGenresFromStorageNotFromNetwork() {
         // given
         configureSUT(withResponses: [.moviesData])
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
@@ -77,7 +77,7 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    func testGetErrorWhenFetchigMoviesIfGengesWerentStoredAndGenresRequesFail() {
+    func testDataManager_whenFetchingMoviesAndFetchGenresWithFailureResult_shouldGetError() {
         // given
         configureSUT(withResponses: [.error, .moviesData])
         let errorExpectation = expectation(description: "Error expectation")
@@ -94,7 +94,7 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    func testIfGenresWereStoredExecutsOnlyOneRequestWhenFetchingMovies() {
+    func testDataManager_whenFetchingMoviesAndGenresWereStoredBefore_networkRequestsCountShouldBeEqualOne() {
         // given
         configureSUT(withResponses: [.moviesData])
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])

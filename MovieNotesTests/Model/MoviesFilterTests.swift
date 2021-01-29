@@ -10,7 +10,7 @@ import XCTest
 @testable import MovieNotes
 
 class MoviesFilterTests: XCTestCase {
-    func testAllRawValuesContainEveryMovieFilter() {
+    func testMoviesFilter_allRawValues_shouldContainEveryMovieFilter() {
         for filter in MoviesFilter.allCases {
             guard MoviesFilter.allRawValues.contains(filter.rawValue) else {
                 XCTFail("allRawValues must contains raw value of every filter"); return
@@ -18,7 +18,7 @@ class MoviesFilterTests: XCTestCase {
         }
     }
     
-    func testAllRawValuesCountEqualAllCasesCount() {
+    func testMoviesFilter_allRawValuesCount_shouldBeEqualAllCasesCount() {
         XCTAssertEqual(MoviesFilter.allRawValues.count, MoviesFilter.allCases.count)
     }
 }

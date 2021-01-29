@@ -23,47 +23,47 @@ class CoordinatorTests: XCTestCase {
         coordinatorMock = nil
     }
     
-    func testCoordinatorExistAfterInitWithRouter() {
+    func testCoordinator_whenInitWithRouter_shouldNotBeNil() {
         XCTAssertNotNil(coordinatorMock)
     }
     
-    func testRouterSetAfterInit() {
+    func testCoordinator_whenInitWithRouter_routerInCoordinatorShouldNotBeNil() {
         XCTAssertNotNil(coordinatorMock.router)
     }
     
-    func testChildrenCountEqualZeroAfterInit() {
+    func testCoordinator_whenInitWithRouter_childrenInCoordinatorShouldBeEqualZero() {
         XCTAssertEqual(coordinatorMock.children.count, 0)
     }
     
-    func testCoordinatorShowMethodCallsRouterShowMethod() {
+    func testCoordinator_whenCallShowMethod_shouldCallsRouterShowMethod() {
         // when
         coordinatorMock.show(animated: true) { }
         // then
         XCTAssertTrue(routerMock.showWithOnDismissedWasCalled)
     }
     
-    func testCoordinatorShowMethodPassOnDismissedComletionToRouterShowMethod() {
+    func testCoordinator_whenCallShowMethodWithOnDismissedArgument_shouldSetOnDismissedToRouter() {
         // when
         coordinatorMock.show(animated: true) { }
         // then
         XCTAssertNotNil(routerMock.onDismissed)
     }
     
-    func testCoordinatorShowMethodWithNilOnDismissedComletionCallRouterShowMethodWithNilOnDismissedComletion() {
+    func testCoordinator_whenCallShowMethodWithoutOnDismissedArgument_onDismissedInRouterShouldBeNil() {
         // when
         coordinatorMock.show(animated: true, onDismissed: nil)
         // then
         XCTAssertNil(routerMock.onDismissed)
     }
     
-    func testCoordinatorHideMethodCallsRouterHideMethod() {
+    func testCoordinator_whenCallsHide_routerShouldCallsHide() {
         // when
         coordinatorMock.hide(animated: true)
         // then
         XCTAssertTrue(routerMock.hideWasCalled)
     }
     
-    func testShowChildMethodAddNewCoordinatorToChildren() {
+    func testCoordinator_whenCallsShowChild_childrenCountInCoordinatorShouldBeOne() {
         // given
         let router = RouterMock()
         let coordinator = CoordinatorMock(router: router)
@@ -73,7 +73,7 @@ class CoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinatorMock.children.count, 1)
     }
     
-    func testWhenCoordinatorShowChildMethodThenRouterCallsShowWithOnDismissedMethod() {
+    func testCoordinator_whenCallsShowChild_routerShouldCallsShowWithOnDismissedMethod() {
         // given
         let router = RouterMock()
         let coordinator = CoordinatorMock(router: router)
@@ -83,7 +83,7 @@ class CoordinatorTests: XCTestCase {
         XCTAssertTrue(router.showWithOnDismissedWasCalled)
     }
     
-    func testWhenHideMethodOfChildCoordinatorCallsThenThisChildWillBeRemovedFromChildrenOfItsParent() {
+    func testCoordinator_whenCallsHideAndChildCoordinatorHasOnlyOneVC_childCoordinatorShouldBeRemovedFromChildrenOfItsParent() {
         // given
         let router = RouterMock()
         let coordinator = CoordinatorMock(router: router)

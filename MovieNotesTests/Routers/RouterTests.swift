@@ -11,27 +11,34 @@ import XCTest
 
 class RouterTests: XCTestCase {
 
-    var mockRouter: RouterMock!
+    var routerMock: RouterMock!
     
     override func setUpWithError() throws {
-        mockRouter = RouterMock()
+        routerMock = RouterMock()
     }
 
     override func tearDownWithError() throws {
-        mockRouter = nil
+        routerMock = nil
     }
     
-    func testFuncShowWithoutOnDismissedDoesNotPassOnDismissedCompletionToFuncShowWithOnDismissed() {
+    func testRouterMock_whenCallFuncShowWithoutOnDismissedArgument_onDismissedShouldBeNil() {
         // when
-        mockRouter.show(UIViewController(), animated: true)
+        routerMock.show(UIViewController(), animated: true)
         // then
-        XCTAssertNil(mockRouter.onDismissed)
+        XCTAssertNil(routerMock.onDismissed)
     }
     
-    func testFuncShowWithoutOnDismissedCallFuncShowWithOnDismissed() {
+    func testRouterMock_whenCallFuncShowWithOnDismissedArgument_onDismissedShouldNotBeNil() {
         // when
-        mockRouter.show(UIViewController(), animated: true)
+        routerMock.show(UIViewController(), animated: true) { }
         // then
-        XCTAssertTrue(mockRouter.showWithOnDismissedWasCalled)
+        XCTAssertNotNil(routerMock.onDismissed)
+    }
+    
+    func testRouterMock_whenCallFuncShowWithoutOnDismissedArgument_shouldCallFuncShowWithOnDismissed() {
+        // when
+        routerMock.show(UIViewController(), animated: true)
+        // then
+        XCTAssertTrue(routerMock.showWithOnDismissedWasCalled)
     }
 }

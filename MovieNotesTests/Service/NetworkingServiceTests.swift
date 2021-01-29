@@ -11,12 +11,12 @@ import PromiseKit
 @testable import MovieNotes
 
 class NetworkingServiceTests: XCTestCase {
-    func testInitServiceIsNotNil() {
+    func testNetworkingService_whenInit_shouldNotBeNil() {
         let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
         XCTAssertNotNil(sut)
     }
     
-    func testFetchGenres() {
+    func testNetworkingService_whenFetchGenresWithSuccessResult_shouldFetchGenres() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
@@ -33,7 +33,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testGetErrorWhenMakeRequest() {
+    func testNetworkingService_whenFetchGenresWithFailureResult_shouldGetError() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.error]), coder: Coder.shared)
         let errorExpectation = expectation(description: "Error expectation")
@@ -49,7 +49,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testGetErrorWhenMakeRequestAndFetchWrongTypeOfResponse() {
+    func testNetworkingService_whenFetchGenresAndGetWrongTypeData_shouldGetError() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.stringData]), coder: Coder.shared)
         let errorExpectation = expectation(description: "Mapping error expectation")
@@ -65,7 +65,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testFetchMovies() {
+    func testNetworkingService_whenFetchMoviesWithSuccessResult_shouldFetchMovies() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.moviesData]), coder: Coder.shared)
         let moviesExpectation = expectation(description: "Movies expectation")
@@ -82,7 +82,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testFetchMovieDetails() {
+    func testNetworkingService_whenFetchMovieDetailsWithSuccessResult_shouldFetchMovieDetails() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.movieDetailsData]), coder: Coder.shared)
         let movieDetailsExpectation = expectation(description: "Movie details expectation")
@@ -100,7 +100,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testFetchImagesForMovie() {
+    func testNetworkingService_whenFetchImagesWithSuccessResult_shouldFetchImages() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.movieImagesData]), coder: Coder.shared)
         let movieImagesExpectation = expectation(description: "Movie images expectation")
@@ -118,7 +118,7 @@ class NetworkingServiceTests: XCTestCase {
         }
     }
     
-    func testFetchTrailers() {
+    func testNetworkingService_whenFetchTrailersWithSuccessResult_shouldFetchTrailers() {
         // given
         let sut = NetworkingService(session: URLSessionMock(responses: [.movieTrailersData]), coder: Coder.shared)
         let movieTrailersExpectation = expectation(description: "Movie trailers expectation")

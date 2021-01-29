@@ -18,14 +18,14 @@ class CustomErrorTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
+        sut = nil
     }
     
-    func testInitErrorNoNil() {
+    func testCustomError_whenInit_shouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
     
-    func testErrorDescriptionIsNotNil() {
+    func testCustomError_whenInit_ErrorDescriptionShouldNotBeNil() {
         XCTAssertNotNil(sut?.localizedDescription)
     }
 }

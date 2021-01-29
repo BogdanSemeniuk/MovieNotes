@@ -13,7 +13,7 @@ class MovieDetailsTests: XCTestCase {
     private var sut: MovieDetails!
     private var decoder = Coder.shared
     private var images: Images!
-    var videos: Videos!
+    private var videos: Videos!
     
     override func setUpWithError() throws {
         guard let movie = decoder.map(data: Data(bundle: Bundle.init(for: MovieDetailsTests.self), fileName: "movieDetails"), type: Movie.self) else { fatalError("Can't create movie details ") }
@@ -22,18 +22,24 @@ class MovieDetailsTests: XCTestCase {
         sut = MovieDetails(movie: movie)
     }
     
-    func testInitWithMovieIsNotNil() {
+    override func tearDownWithError() throws {
+        images = nil
+        videos = nil
+        sut = nil
+    }
+    
+    func testMovieDetails_whenInitWithMovie_shouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
     
-    func testInitWithMovieBackdropsPostersTrailersAreEmptyArrays() {
+    func testMovieDetails_whenInitWithMovie_backdropsAndPostersAndTrailersShouldBeEqualEmptyArrays() {
         XCTAssertNotNil(sut.movie)
         XCTAssertTrue(sut.backdrops.isEmpty)
         XCTAssertTrue(sut.posters.isEmpty)
         XCTAssertTrue(sut.trailers.isEmpty)
     }
     
-    func testAddImagesSetBeckdropsAndPosters() {
+    func testMovieDetails_whenAddImages_beckdropsAndPostersInMovieDetailsShouldBeSet() {
         // when
         sut.add(images: images)
         // then
@@ -41,7 +47,7 @@ class MovieDetailsTests: XCTestCase {
         XCTAssertEqual(sut.backdrops.count, images.backdrops.count)
     }
     
-    func testAddVideosSetTrailers() {
+    func testMovieDetails_whenAddVideos_trailersInMovieDetailsShouldBeSet() {
         // when
         sut.add(videos: videos)
         // then

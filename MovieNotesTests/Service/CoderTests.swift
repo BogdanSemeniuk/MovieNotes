@@ -17,11 +17,15 @@ class CoderTests: XCTestCase {
         sut = Coder.shared
     }
     
-    func testInitCoderIsNotNil() {
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func testCoder_whenInit_shouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
     
-    func testCreateDataFromObject() {
+    func testCoder_whenCreateDataFromObject_dataShouldNotBeNil() {
         // given
         let genre = Genre(id: 0, name: "Action")
         // when
@@ -30,7 +34,7 @@ class CoderTests: XCTestCase {
         XCTAssertNotNil(data)
     }
     
-    func testMapObjectFromData() {
+    func testCoder_whenObjectTransformToDataAndThisDataMapToObject_mappedObjectShouldBeEqualToStartObject() {
         // given
         let genre = Genre(id: 0, name: "Action")
         guard let data = sut?.toData(object: genre) else { XCTFail("Can't create data"); return }
@@ -41,7 +45,7 @@ class CoderTests: XCTestCase {
         XCTAssertEqual(genre.name, object.name, "Names must be equal")
     }
     
-    func testMapArrayOfObjects() {
+    func testCoder_whenArrayOfObjectsTransformToDataAndThisDataMapToArrayOfObjects_mappedObjectsShouldBeEqualToStartObjects() {
         // given
         let genres = [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")]
         guard let data = sut?.toData(object: genres) else { XCTFail("Can't create data"); return }
@@ -49,9 +53,10 @@ class CoderTests: XCTestCase {
         guard let objects = sut?.map(data: data, type: [Genre].self) else { XCTFail("Can't map Genre from data"); return }
         // then
         XCTAssertEqual(objects.count, 2, "Objects count must be two")
+        XCTAssertTrue(objects.contains(where: { $0.name == "Action" }), "Objects should contain genre with name Action")
     }
     
-    func testMapObjectFailIfWrongTypeExpected() {
+    func testCoder_whenMapObjectAndWrongTypeExpected_shouldFetchNil() {
         // given
         let genre = Genre(id: 0, name: "Action")
         guard let data = sut?.toData(object: genre) else { XCTFail("Can't create data"); return }

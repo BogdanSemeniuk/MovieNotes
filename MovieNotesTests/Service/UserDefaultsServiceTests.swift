@@ -21,11 +21,15 @@ class UserDefaultsServiceTests: XCTestCase {
         sut = UserDefaultsService(userDefaults: userDefaults, coder: coder)
     }
     
-    func testInitUserDefaultsServiceExistsUserDefaultsService() {
+    override func tearDownWithError() throws {
+        sut = nil
+    }
+    
+    func testUserDefaultsService_whenInit_shouldNotBeNil() {
         XCTAssertNotNil(sut)
     }
     
-    func testSavedGenresEqualsFetchedGenres() {
+    func testUserDefaultsService_whenSaveGenresAndThenFetchGenreWithId_fetchedGenresShouldContainsPreviouslySavedGenre() {
         // given
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         // when
@@ -36,7 +40,7 @@ class UserDefaultsServiceTests: XCTestCase {
         XCTAssert(fetchedGenre?.name == "Comedy", "Genre with name = Comedy must be saved")
     }
     
-    func testFetchGenresWhenGenresWereSavedBefore() {
+    func testUserDefaultsService_whenSaveGenresAndThenFetchGenres_fetchedGenresShouldBeEqualSavedGenres() {
         // given
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let genresExpectation = expectation(description: "Genres expectation")
@@ -56,7 +60,7 @@ class UserDefaultsServiceTests: XCTestCase {
         }
     }
     
-    func testGetErrorWhenFetchGenresButGenresWereNotSavedBefore() {
+    func testUserDefaultsService_whenFetchGenresButTheyWareNotSavedBefore_shouldGetError() {
         // given
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
@@ -73,14 +77,14 @@ class UserDefaultsServiceTests: XCTestCase {
         }
     }
     
-    func testFetchedGenresEqualEmptyArrayIfGenresWerentSavedBefore() {
+    func testUserDefaultsService_whenFetcheGenreWithIdButGenreWasNotSavedBefore_shouldFetchNil() {
         // when
         let fetchedGenre = sut.fetchGenre(withId: 1)
         // then
         XCTAssertNil(fetchedGenre, "Fetched genre must be nil")
     }
     
-    func testFetchingGenresListThrowsErrorIfGenresWerentSavedBefore() throws {
+    func testUserDefaultsService_whenFetchGenresListButGenresWereNotSavedBefore_shouldThrowsError() throws {
         var thrownError: Error?
         
         XCTAssertThrowsError(try sut.fetchGenresList()) {

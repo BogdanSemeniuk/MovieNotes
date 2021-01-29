@@ -9,9 +9,9 @@
 import UIKit
 
 final class MainRouter: Router {
-    public let window: UIWindow
+    let window: UIWindow
     
-    public init(window: UIWindow) {
+    init(window: UIWindow) {
         self.window = window
     }
     
