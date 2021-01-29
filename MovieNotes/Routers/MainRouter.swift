@@ -16,7 +16,8 @@ final class MainRouter: Router {
     }
     
     func show(_ viewController: UIViewController, animated: Bool, onDismissed: (() -> Void)?) {
-        
+        window.rootViewController = viewController
+        window.makeKeyAndVisible()
     }
     
     func hide(animated: Bool) {

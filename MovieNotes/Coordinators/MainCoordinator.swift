@@ -19,5 +19,16 @@ final class MainCoordinator: Coordinator {
     func show(animated: Bool, onDismissed: (() -> Void)?) {
         let tabBarController = UITabBarController()
         
+        let moviesNavigationController = UINavigationController()
+        moviesNavigationController.isNavigationBarHidden = true
+        moviesNavigationController.tabBarItem = UITabBarItem(title: "Movies", image: UIImage(named: "movieBlack"), tag: 0)
+
+        let activitiesNavigationController = UINavigationController()
+        activitiesNavigationController.isNavigationBarHidden = true
+        activitiesNavigationController.tabBarItem = UITabBarItem(title: "Activities", image: UIImage(named: "accountCircle"), tag: 1)
+        
+        tabBarController.viewControllers = [moviesNavigationController, activitiesNavigationController]
+        
+        router.show(tabBarController, animated: true)
     }
 }
