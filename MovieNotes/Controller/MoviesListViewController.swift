@@ -8,5 +8,10 @@
 
 import UIKit
 
+protocol MoviesListCoordinatorDelegate: class {
+    
+}
+
 final class MoviesListViewController: UIViewController, Storyboarded {
+    weak var coordinator: MoviesListCoordinatorDelegate?
 }

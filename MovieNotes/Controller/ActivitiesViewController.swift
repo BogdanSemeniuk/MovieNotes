@@ -8,5 +8,10 @@
 
 import UIKit
 
+protocol ActivitiesCoordinatorDelegate: class {
+    
+}
+
 final class ActivitiesViewController: UIViewController, Storyboarded {
+    weak var coordinator: ActivitiesCoordinatorDelegate?
 }

@@ -18,7 +18,7 @@ final class MoviesRouter: NSObject, Router {
     
     func show(_ viewController: UIViewController, animated: Bool, onDismissed: (() -> Void)?) {
         onDismissForViewController[viewController] = onDismissed
-        navigationController.pushViewController(viewController, animated: false)
+        navigationController.pushViewController(viewController, animated: animated)
     }
     
     func hide(animated: Bool) {
