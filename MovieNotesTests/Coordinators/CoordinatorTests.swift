@@ -73,6 +73,16 @@ class CoordinatorTests: XCTestCase {
         XCTAssertEqual(coordinatorMock.children.count, 1)
     }
     
+    func testCoordinator_whenCallsShowChild_childCoordinatorShouldCallsShowMethod() {
+        // given
+        let router = RouterMock()
+        let coordinator = CoordinatorMock(router: router)
+        // when
+        coordinatorMock.showChild(coordinator, animated: true)
+        // then
+        XCTAssertTrue(coordinator.showWasCalled)
+    }
+    
     func testCoordinator_whenCallsShowChild_routerShouldCallsShowWithOnDismissedMethod() {
         // given
         let router = RouterMock()
