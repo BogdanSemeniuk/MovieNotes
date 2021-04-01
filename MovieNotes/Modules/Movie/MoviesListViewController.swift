@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Combine
 
 protocol MoviesListCoordinatorDelegate: class {
     
@@ -14,5 +15,27 @@ protocol MoviesListCoordinatorDelegate: class {
 
 final class MoviesListViewController: UIViewController, Storyboarded {
     weak var coordinator: MoviesListCoordinatorDelegate?
-    var viewModel: MovieListViewModel?
+    var viewModel: MovieListViewModelType?
+    private var bindings = Set<AnyCancellable?>()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupBindings()
+    }
+    
+    private func setupBindings() {
+        let stateBinding = viewModel?.statePublisher.sink(receiveValue: { state in
+            guard let state = state else { return }
+            switch state {
+            case .loading: print("Loading")
+            case .finishedLoading: print("finishedLoading")
+            case .error: print("error")
+            }
+        })
+        bindings.insert(stateBinding)
+    }
+    
+    @IBAction func buttonAction(_ sender: UIButton) {
+        viewModel?.fetchMovies()
+    }
 }
