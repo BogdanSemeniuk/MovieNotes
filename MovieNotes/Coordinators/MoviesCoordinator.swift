@@ -19,6 +19,7 @@ final class MoviesCoordinator: Coordinator {
     func show(animated: Bool, onDismissed: (() -> Void)?) {
         let vc = MoviesListViewController.instantiateFromStoryboard()
         vc.coordinator = self
+        vc.viewModel = MovieListViewModel()
         router.show(vc, animated: animated, onDismissed: onDismissed)
     }
 }

@@ -14,4 +14,5 @@ protocol MoviesListCoordinatorDelegate: class {
 
 final class MoviesListViewController: UIViewController, Storyboarded {
     weak var coordinator: MoviesListCoordinatorDelegate?
+    var viewModel: MovieListViewModel?
 }
