@@ -8,6 +8,7 @@
 
 import Foundation
 import Combine
+import PromiseKit
 
 protocol MovieListViewModelType {
     func fetchMovies()
@@ -23,6 +24,7 @@ enum State {
 final class MovieListViewModel: MovieListViewModelType {
     var statePublisher:  Published<State?>.Publisher { $state }
     @Published private var state: State!
+    private var page = 1
     private let dataManager: DataManager
     
     init(dataManager: DataManager) {
@@ -31,7 +33,11 @@ final class MovieListViewModel: MovieListViewModelType {
 
     func fetchMovies() {
         state = .loading
-        DispatchQueue.global().asyncAfter(deadline: .now() + 2) { [weak self] in
+        dataManager.fetchMovies(page: page, moviesFilter: .nowPlaying).done { [weak self] packageOfMovies in
+            print(packageOfMovies.results.count)
+        }.catch { [weak self] error in
+            self?.state = .error(error)
+        }.finally { [weak self] in
             self?.state = .finishedLoading
         }
     }

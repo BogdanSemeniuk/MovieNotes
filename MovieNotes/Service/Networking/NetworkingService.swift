@@ -26,8 +26,10 @@ final class NetworkingService {
     }
     
     func fetchMovies(page: Int, moviesFilter: MoviesFilter) -> Promise<PackageOfMovies> {
+        let request = Endpoint.packageOfMovies(page: page, moviesFilter: moviesFilter).request
+        URLCache.shared.removeCachedResponse(for: request)
         return firstly {
-            session.dataTask(.promise, with: Endpoint.packageOfMovies(page: page, moviesFilter: moviesFilter).request)
+            session.dataTask(.promise, with: request)
         }.compactMap { [weak self] in
             return self?.coder.map(data: $0.data, type: PackageOfMovies.self)
         }

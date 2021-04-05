@@ -18,6 +18,9 @@
 		F505616A25BF127D00A92CCE /* MoviesListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505616925BF127D00A92CCE /* MoviesListViewController.swift */; };
 		F505616E25BF12B300A92CCE /* MoviesList.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = F505616D25BF12B300A92CCE /* MoviesList.storyboard */; };
 		F505617225BF15D800A92CCE /* Storyboarded.swift in Sources */ = {isa = PBXBuildFile; fileRef = F505617125BF15D800A92CCE /* Storyboarded.swift */; };
+		F50BDC5B261B065F00F64AC0 /* LoadingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50BDC5A261B065F00F64AC0 /* LoadingViewController.swift */; };
+		F50BDC5F261B077900F64AC0 /* UIViewController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50BDC5E261B077900F64AC0 /* UIViewController+extension.swift */; };
+		F50BDC63261B0DBC00F64AC0 /* UIAlertController+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F50BDC62261B0DBC00F64AC0 /* UIAlertController+extension.swift */; };
 		F52124602555A0D60030DFD9 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = F521245F2555A0D60030DFD9 /* Country.swift */; };
 		F52124642555A19C0030DFD9 /* Worker.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124632555A19C0030DFD9 /* Worker.swift */; };
 		F52124682555A1AD0030DFD9 /* Actor.swift in Sources */ = {isa = PBXBuildFile; fileRef = F52124672555A1AD0030DFD9 /* Actor.swift */; };
@@ -102,6 +105,9 @@
 		F505616925BF127D00A92CCE /* MoviesListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesListViewController.swift; sourceTree = "<group>"; };
 		F505616D25BF12B300A92CCE /* MoviesList.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = MoviesList.storyboard; sourceTree = "<group>"; };
 		F505617125BF15D800A92CCE /* Storyboarded.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storyboarded.swift; sourceTree = "<group>"; };
+		F50BDC5A261B065F00F64AC0 /* LoadingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingViewController.swift; sourceTree = "<group>"; };
+		F50BDC5E261B077900F64AC0 /* UIViewController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+extension.swift"; sourceTree = "<group>"; };
+		F50BDC62261B0DBC00F64AC0 /* UIAlertController+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIAlertController+extension.swift"; sourceTree = "<group>"; };
 		F521245F2555A0D60030DFD9 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
 		F52124632555A19C0030DFD9 /* Worker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Worker.swift; sourceTree = "<group>"; };
 		F52124672555A1AD0030DFD9 /* Actor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Actor.swift; sourceTree = "<group>"; };
@@ -199,6 +205,8 @@
 			isa = PBXGroup;
 			children = (
 				F55A97FD259C763A00402020 /* URL+extension.swift */,
+				F50BDC5E261B077900F64AC0 /* UIViewController+extension.swift */,
+				F50BDC62261B0DBC00F64AC0 /* UIAlertController+extension.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -310,6 +318,7 @@
 				F505612A25BED38A00A92CCE /* Extensions */,
 				F505613A25BED58E00A92CCE /* Routers */,
 				F505613725BED57F00A92CCE /* Coordinators */,
+				F50BDC5A261B065F00F64AC0 /* LoadingViewController.swift */,
 			);
 			path = MovieNotes;
 			sourceTree = "<group>";
@@ -611,6 +620,7 @@
 				F521247A2555AA830030DFD9 /* DataManager.swift in Sources */,
 				F5C54FC6250A756800C2C3A8 /* Genre.swift in Sources */,
 				F53231BA25BF27FD00340E3D /* MainRouter.swift in Sources */,
+				F50BDC63261B0DBC00F64AC0 /* UIAlertController+extension.swift in Sources */,
 				F53231AE25BF26BF00340E3D /* ActivitiesRouter.swift in Sources */,
 				F5DA5A18250BA1E70077BA59 /* Coder.swift in Sources */,
 				F5A3189124EFCDF700F7CE77 /* AppDelegate.swift in Sources */,
@@ -621,6 +631,7 @@
 				F55A980A259C858100402020 /* Images.swift in Sources */,
 				F5B21C16256D633E00BE4219 /* GenreList.swift in Sources */,
 				F5DA5A12250B9A560077BA59 /* UserDefaultsService.swift in Sources */,
+				F50BDC5F261B077900F64AC0 /* UIViewController+extension.swift in Sources */,
 				F55A97FE259C763A00402020 /* URL+extension.swift in Sources */,
 				F55A9826259CA80400402020 /* MovieDetails.swift in Sources */,
 				F53231B225BF26D700340E3D /* ActivitiesCoordinator.swift in Sources */,
@@ -630,6 +641,7 @@
 				F5733218250F8B0F002FB2DD /* CustomError.swift in Sources */,
 				F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */,
 				F505613025BED54300A92CCE /* Router.swift in Sources */,
+				F50BDC5B261B065F00F64AC0 /* LoadingViewController.swift in Sources */,
 				F5733210250F7409002FB2DD /* NetworkingSession.swift in Sources */,
 				F5B2B3F62615C063009A5C3E /* MovieListViewModel.swift in Sources */,
 				F53231A225BF1DB900340E3D /* MoviesRouter.swift in Sources */,
