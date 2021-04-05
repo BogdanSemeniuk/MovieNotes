@@ -37,8 +37,4 @@ final class MoviesListViewController: UIViewController, Storyboarded {
         })
         bindings.insert(stateBinding)
     }
-    
-    @IBAction func buttonAction(_ sender: UIButton) {
-        viewModel?.fetchMovies()
-    }
 }
