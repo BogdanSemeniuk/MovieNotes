@@ -11,6 +11,7 @@ import Foundation
 protocol MovieCellViewModelType {
     var title: String { get }
     var description: String { get }
+    var poster: URL? { get }
 }
 
 struct MovieCellViewModel: MovieCellViewModelType {
@@ -20,6 +21,10 @@ struct MovieCellViewModel: MovieCellViewModelType {
     }
     var description: String {
         movie.overview ?? "Description not found"
+    }
+    
+    var poster: URL? {
+        movie.posterPath.map({ ImageHelper.fullPath(for: $0, withSize: .medium) })
     }
     
     init(movie: Movie) {

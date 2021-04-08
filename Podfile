@@ -3,6 +3,7 @@
 
 pod "PromiseKit/CorePromise", "~> 6.8"
 pod 'PromiseKit/Foundation'
+pod 'Kingfisher', '~> 6.0'
 
 target 'MovieNotes' do
   

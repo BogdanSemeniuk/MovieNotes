@@ -11,4 +11,5 @@ import Foundation
 final class Helper {
     static let apiKey = "85cfecbf4366c6b833864140f4bc428c"
     static let baseURL = URL(string: "https://api.themoviedb.org/3")!
+    static let imageBaseURL = URL(string: "https://image.tmdb.org/t/p/")!
 }

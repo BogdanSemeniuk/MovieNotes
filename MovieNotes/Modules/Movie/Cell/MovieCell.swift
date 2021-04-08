@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class MovieCell: UITableViewCell, ReuseIdentifiable {
     var viewModel: MovieCellViewModelType? {
@@ -22,5 +23,6 @@ final class MovieCell: UITableViewCell, ReuseIdentifiable {
         guard let viewModel = viewModel else { return }
         titleLabel.text = viewModel.title
         descriptionLabel.text = viewModel.description
+        KF.url(viewModel.poster).placeholder(#imageLiteral(resourceName: "posterPlaceholder")).set(to: posterImageView)
     }
 }

@@ -60,6 +60,7 @@
 		F55D8B822588F8E800BD6199 /* PackageOfMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = F55D8B812588F8E800BD6199 /* PackageOfMovies.swift */; };
 		F55D8B8E2589092100BD6199 /* movies in Resources */ = {isa = PBXBuildFile; fileRef = F55D8B8D2589092100BD6199 /* movies */; };
 		F5697FE3261F26BE0077C344 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5697FE2261F26BE0077C344 /* ReuseIdentifiable.swift */; };
+		F5697FF5261F46100077C344 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5697FF4261F46100077C344 /* ImageHelper.swift */; };
 		F573320B250F6F6B002FB2DD /* NetworkingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */; };
 		F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320C250F6FEC002FB2DD /* NetworkingService.swift */; };
 		F5733210250F7409002FB2DD /* NetworkingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320F250F7409002FB2DD /* NetworkingSession.swift */; };
@@ -150,6 +151,7 @@
 		F55D8B812588F8E800BD6199 /* PackageOfMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PackageOfMovies.swift; sourceTree = "<group>"; };
 		F55D8B8D2589092100BD6199 /* movies */ = {isa = PBXFileReference; lastKnownFileType = text; path = movies; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.json; };
 		F5697FE2261F26BE0077C344 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
+		F5697FF4261F46100077C344 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTests.swift; sourceTree = "<group>"; };
 		F573320C250F6FEC002FB2DD /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		F573320F250F7409002FB2DD /* NetworkingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingSession.swift; sourceTree = "<group>"; };
@@ -422,6 +424,7 @@
 			children = (
 				F5733216250F8A96002FB2DD /* CustomError.swift */,
 				F5C54FC9250A7A7F00C2C3A8 /* Helper.swift */,
+				F5697FF4261F46100077C344 /* ImageHelper.swift */,
 				F505617125BF15D800A92CCE /* Storyboarded.swift */,
 				F5697FE2261F26BE0077C344 /* ReuseIdentifiable.swift */,
 			);
@@ -674,6 +677,7 @@
 				F505616A25BF127D00A92CCE /* MoviesListViewController.swift in Sources */,
 				F5C54FCA250A7A7F00C2C3A8 /* Helper.swift in Sources */,
 				F55A981A259C8F5500402020 /* Videos.swift in Sources */,
+				F5697FF5261F46100077C344 /* ImageHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
