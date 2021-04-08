@@ -62,6 +62,8 @@
 		F5697FE3261F26BE0077C344 /* ReuseIdentifiable.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5697FE2261F26BE0077C344 /* ReuseIdentifiable.swift */; };
 		F5697FF5261F46100077C344 /* ImageHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5697FF4261F46100077C344 /* ImageHelper.swift */; };
 		F5698006261F4CE70077C344 /* AlertControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5698005261F4CE70077C344 /* AlertControllerTests.swift */; };
+		F569800A261F4EA50077C344 /* MovieCellViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5698009261F4EA50077C344 /* MovieCellViewModelTests.swift */; };
+		F5698013261F4F9E0077C344 /* Movie+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = F5698012261F4F9E0077C344 /* Movie+extension.swift */; };
 		F573320B250F6F6B002FB2DD /* NetworkingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */; };
 		F573320D250F6FEC002FB2DD /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320C250F6FEC002FB2DD /* NetworkingService.swift */; };
 		F5733210250F7409002FB2DD /* NetworkingSession.swift in Sources */ = {isa = PBXBuildFile; fileRef = F573320F250F7409002FB2DD /* NetworkingSession.swift */; };
@@ -154,6 +156,8 @@
 		F5697FE2261F26BE0077C344 /* ReuseIdentifiable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReuseIdentifiable.swift; sourceTree = "<group>"; };
 		F5697FF4261F46100077C344 /* ImageHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageHelper.swift; sourceTree = "<group>"; };
 		F5698005261F4CE70077C344 /* AlertControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertControllerTests.swift; sourceTree = "<group>"; };
+		F5698009261F4EA50077C344 /* MovieCellViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCellViewModelTests.swift; sourceTree = "<group>"; };
+		F5698012261F4F9E0077C344 /* Movie+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+extension.swift"; sourceTree = "<group>"; };
 		F573320A250F6F6B002FB2DD /* NetworkingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceTests.swift; sourceTree = "<group>"; };
 		F573320C250F6FEC002FB2DD /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		F573320F250F7409002FB2DD /* NetworkingSession.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingSession.swift; sourceTree = "<group>"; };
@@ -290,6 +294,14 @@
 			path = View;
 			sourceTree = "<group>";
 		};
+		F569800D261F4EB20077C344 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				F5698009261F4EA50077C344 /* MovieCellViewModelTests.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		F573320E250F73F0002FB2DD /* Networking */ = {
 			isa = PBXGroup;
 			children = (
@@ -378,6 +390,7 @@
 				F55A9813259C8A7900402020 /* images */,
 				F55A981D259C90A600402020 /* trailers */,
 				F55D8B8D2589092100BD6199 /* movies */,
+				F569800D261F4EB20077C344 /* ViewModel */,
 				F5697FFC261F4CBE0077C344 /* View */,
 				F505615625BEF26800A92CCE /* Coordinators */,
 				F505614125BED7B500A92CCE /* Routers */,
@@ -386,6 +399,7 @@
 				F5DA5A15250BA1610077BA59 /* Service */,
 				F5733215250F755C002FB2DD /* Mock */,
 				F55A980F259C88C400402020 /* Data+extension.swift */,
+				F5698012261F4F9E0077C344 /* Movie+extension.swift */,
 			);
 			path = MovieNotesTests;
 			sourceTree = "<group>";
@@ -696,6 +710,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F5698013261F4F9E0077C344 /* Movie+extension.swift in Sources */,
 				F542114F250FA57B00D6ACFE /* CustomErrorTests.swift in Sources */,
 				F524364C258CF8FB0047A13D /* MoviesFilterTests.swift in Sources */,
 				F52124742555A96E0030DFD9 /* DataManagerTests.swift in Sources */,
@@ -713,6 +728,7 @@
 				F5B2B3FA2615C2EA009A5C3E /* MoviesCoordinatorTests.swift in Sources */,
 				F5DA5A14250BA1530077BA59 /* CoderTests.swift in Sources */,
 				F550FDC925C4712C00EED3F3 /* MainCoordinatorTests.swift in Sources */,
+				F569800A261F4EA50077C344 /* MovieCellViewModelTests.swift in Sources */,
 				F505614925BED7EA00A92CCE /* RouterTests.swift in Sources */,
 				F5698006261F4CE70077C344 /* AlertControllerTests.swift in Sources */,
 				F550FDC525C4383300EED3F3 /* MainRouterTests.swift in Sources */,
