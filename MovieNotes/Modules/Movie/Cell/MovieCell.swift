@@ -8,7 +8,7 @@
 
 import UIKit
 
-final class MovieCell: UITableViewCell {
+final class MovieCell: UITableViewCell, ReuseIdentifiable {
     var viewModel: MovieCellViewModelType? {
         didSet {
             configure()
