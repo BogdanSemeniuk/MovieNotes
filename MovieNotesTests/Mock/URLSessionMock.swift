@@ -9,9 +9,8 @@
 import PromiseKit
 @testable import MovieNotes
 
-
 final class URLSessionMock: NetworkSession {
-    var requestsCount = 0
+    private(set) var requestsCount = 0
     private let responses: [ResponseTypeMock]
     
     init(responses: [ResponseTypeMock]) {
@@ -25,4 +24,3 @@ final class URLSessionMock: NetworkSession {
         return ResponseConfigurator.configure(with: responses[requestsCount])
     }
 }
-
