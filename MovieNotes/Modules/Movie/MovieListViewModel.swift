@@ -12,32 +12,19 @@ import PromiseKit
 
 protocol MovieListViewModelType {
     var statePublisher: Publishers.Drop<Published<State>.Publisher> { get }
-    var moviesPublisher: AnyPublisher<[Movie], Never> { get }
     var moviesCount: Int { get }
     func fetchMovies()
     func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType
-}
-
-enum State {
-    case loading
-    case finishedLoading
-    case error(Error)
+    var moviesPublisher: PublishableSubject<[Movie]> { get }
 }
 
 final class MovieListViewModel: MovieListViewModelType {
     var statePublisher: Publishers.Drop<Published<State>.Publisher> { $state.dropFirst() }
+    var moviesPublisher = PublishableSubject<[Movie]>([])
     var moviesCount: Int {
-        return movies.count
+        return moviesPublisher.value.count
     }
     @Published private var state = State.loading
-    var moviesPublisher: AnyPublisher<[Movie], Never> {
-        moviesSubject.eraseToAnyPublisher()
-    }
-    private let moviesSubject = PassthroughSubject<[Movie], Never>()
-    private var movies = [Movie]() {
-        didSet { moviesSubject.send(movies) }
-    }
-    
     private var page = 1
     private let dataManager: DataManager
     
@@ -46,13 +33,13 @@ final class MovieListViewModel: MovieListViewModelType {
     }
     
     func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType {
-        return MovieCellViewModel(movie: movies[indexPath.row])
+        return MovieCellViewModel(movie: moviesPublisher.value[indexPath.row])
     }
 
     func fetchMovies() {
         state = .loading
         dataManager.fetchMovies(page: page, moviesFilter: .nowPlaying).done { [weak self] packageOfMovies in
-            self?.movies = packageOfMovies.results
+            self?.moviesPublisher.value = packageOfMovies.results
         }.catch { [weak self] error in
             self?.state = .error(error)
         }.finally { [weak self] in

@@ -38,7 +38,7 @@ final class MoviesListViewController: UIViewController, Storyboarded {
                 self.present(UIAlertController.make(withMessage: error.localizedDescription), animated: true)
             }
         })
-        let moviesBinding = viewModel?.moviesPublisher.sink{ [weak self] _ in
+        let moviesBinding = viewModel?.moviesPublisher.valuePublisher.sink{ [weak self] _ in
             self?.moviesTableView.reloadData()
         }
         bindings.insert(stateBinding)
@@ -56,4 +56,7 @@ extension MoviesListViewController: UITableViewDataSource {
         cell.viewModel = viewModel?.movieCellViewModel(for: indexPath)
         return cell
     }
+}
+
+extension MoviesListViewController: UITableViewDelegate {
 }
