@@ -11,14 +11,10 @@ import PromiseKit
 @testable import MovieNotes
 
 class NetworkingServiceTests: XCTestCase {
-    func testNetworkingService_whenInit_shouldNotBeNil() {
-        let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
-        XCTAssertNotNil(sut)
-    }
     
     func testNetworkingService_whenFetchGenresWithSuccessResult_shouldFetchGenres() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.genresData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.genresData], testName: #function), coder: Coder.shared)
         let genresExpectation = expectation(description: "Genres expectation")
         var genresList: GenresList?
         // when
@@ -35,7 +31,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchGenresWithFailureResult_shouldGetError() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.error]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.error], testName: #function), coder: Coder.shared)
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
@@ -51,7 +47,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchGenresAndGetWrongTypeData_shouldGetError() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.stringData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.stringData], testName: #function), coder: Coder.shared)
         let errorExpectation = expectation(description: "Mapping error expectation")
         var error: Error?
         // when
@@ -67,7 +63,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchMoviesWithSuccessResult_shouldFetchMovies() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.moviesData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.moviesData], testName: #function), coder: Coder.shared)
         let moviesExpectation = expectation(description: "Movies expectation")
         var packageOfMovies: PackageOfMovies?
         // when
@@ -84,7 +80,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchMovieDetailsWithSuccessResult_shouldFetchMovieDetails() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.movieDetailsData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieDetailsData], testName: #function), coder: Coder.shared)
         let movieDetailsExpectation = expectation(description: "Movie details expectation")
         var movieDetails: Movie?
         // when
@@ -102,7 +98,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchImagesWithSuccessResult_shouldFetchImages() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.movieImagesData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieImagesData], testName: #function), coder: Coder.shared)
         let movieImagesExpectation = expectation(description: "Movie images expectation")
         var images: Images?
         // when
@@ -120,7 +116,7 @@ class NetworkingServiceTests: XCTestCase {
     
     func testNetworkingService_whenFetchTrailersWithSuccessResult_shouldFetchTrailers() {
         // given
-        let sut = NetworkingService(session: URLSessionMock(responses: [.movieTrailersData]), coder: Coder.shared)
+        let sut = NetworkingService(session: URLSessionMock(responses: [.movieTrailersData], testName: #function), coder: Coder.shared)
         let movieTrailersExpectation = expectation(description: "Movie trailers expectation")
         var trailers: Videos?
         // when

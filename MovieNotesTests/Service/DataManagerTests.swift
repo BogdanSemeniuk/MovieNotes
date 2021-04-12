@@ -15,14 +15,9 @@ class DataManagerTests: XCTestCase {
     private var storage: UserDefaultsService!
     private var urlSessionMock: URLSessionMock!
     
-    func testDataManager_whenInit_shouldNotBeNil() {
-        configureSUT(withResponses: [.error])
-        XCTAssertNotNil(sut)
-    }
-    
     func testDataManager_whenFetchMoviesWithSuccessResult_genresShouldBeSavedToStorageAndPackageOfMoviesShouldBeFetched() {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData])
+        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
         var package: PackageOfMovies?
@@ -43,7 +38,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchMoviesWithFailureResultButFetchGenresWithSuccessResult_genresShouldBeSavedToStorage() {
         // given
-        configureSUT(withResponses: [.genresData, .error])
+        configureSUT(withResponses: [.genresData, .error], forTestWithName: #function)
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
         // when
@@ -60,7 +55,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchMoviesAndGenresWereStoredBefore_shouldFetchGenresFromStorageNotFromNetwork() {
         // given
-        configureSUT(withResponses: [.moviesData])
+        configureSUT(withResponses: [.moviesData], forTestWithName: #function)
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
@@ -79,7 +74,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchingMoviesAndFetchGenresWithFailureResult_shouldGetError() {
         // given
-        configureSUT(withResponses: [.error, .moviesData])
+        configureSUT(withResponses: [.error, .moviesData], forTestWithName: #function)
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
@@ -96,7 +91,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchingMoviesAndGenresWereStoredBefore_networkRequestsCountShouldBeEqualOne() {
         // given
-        configureSUT(withResponses: [.moviesData])
+        configureSUT(withResponses: [.moviesData], forTestWithName: #function)
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let requestsCountExpectation = expectation(description: "Request count expectation")
         // when
@@ -110,12 +105,12 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    private func configureSUT(withResponses responses: [ResponseTypeMock]) {
+    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String) {
         let userDefaults = UserDefaults(suiteName: #file)!
         userDefaults.removePersistentDomain(forName: #file)
         let coder = Coder.shared
         storage = UserDefaultsService(userDefaults: userDefaults, coder: coder)
-        urlSessionMock = URLSessionMock(responses: responses)
+        urlSessionMock = URLSessionMock(responses: responses, testName: testName)
         sut = DataManager(storage: storage,
                           networking: NetworkingService(session: urlSessionMock, coder: coder))
     }

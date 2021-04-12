@@ -20,27 +20,18 @@ class MovieListViewModelTests: XCTestCase {
     }
 
     override func tearDownWithError() throws {
-        sut = nil
         dataManager = nil
+        sut = nil
         bindings = nil
     }
-
-    func testMovieListViewModel_whenInitWithDataManager_shouldNotBeNil() throws {
-        // when
-        sut = MovieListViewModel(dataManager: DataManager(storage: UserDefaultsService(), networking: NetworkingService()))
-        // then
-        XCTAssertNotNil(sut)
-    }
     
-    func testMovieListViewModel_whenFetchMovies_viewContrllerWillGetFinishLoadingStates() throws {
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetLoadingState() throws {
         // given
-        dataManager = makeDataManager(withResponses: [.moviesData])
-        sut = MovieListViewModel(dataManager: dataManager)
+        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
         let statusExpectation = expectation(description: "Status expectation")
         sut.statePublisher.sink { state in
-            if case .finishedLoading = state {
-                statusExpectation.fulfill()
-            }
+            guard case .loading = state else { return }
+            statusExpectation.fulfill()
         }.store(in: &bindings)
         // when
         sut.fetchMovies()
@@ -48,10 +39,82 @@ class MovieListViewModelTests: XCTestCase {
         waitForExpectations(timeout: 1) { (_) in
         }
     }
+
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetFinishLoadingState() throws {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        let statusExpectation = expectation(description: "Status expectation")
+        sut.statePublisher.sink { state in
+            guard case .finishedLoading = state else { return }
+            statusExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchMovies()
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+        }
+    }
+
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetErrorState() throws {
+        // given
+        configureSUT(withResponses: [.error], forTestWithName: #function)
+        let statusExpectation = expectation(description: "Status expectation")
+        var error: Error?
+        sut.statePublisher.sink { state in
+            guard case .error(let err) = state else { return }
+            error = err
+            statusExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchMovies()
+        // then
+        waitForExpectations(timeout: 1) { (_) in
+            XCTAssertNotNil(error)
+        }
+    }
+
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetMovies() throws {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        let moviesExpectation = expectation(description: "Movies expectation")
+        var movies = [Movie]()
+        sut.moviesPublisher.valuePublisher.sink { fetchedMovies in
+            movies = fetchedMovies
+            moviesExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchMovies()
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertEqual(movies.count, 3)
+            XCTAssertEqual(movies.first?.title, "The Croods: A New Age")
+        }
+    }
     
-    private func makeDataManager(withResponses responses: [ResponseTypeMock]) -> DataManager {
+    func testMovieListViewModel_whenFetchMovies_moviesCountEqualsFetchedMoviesCount() throws {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        let moviesExpectation = expectation(description: "Movies expectation")
+        var fetchedMoviesCount = 0
+        sut.moviesPublisher.valuePublisher.sink { fetchedMovies in
+            fetchedMoviesCount = fetchedMovies.count
+            moviesExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchMovies()
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertEqual(self.sut.moviesCount, fetchedMoviesCount)
+        }
+    }
+    
+    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String) {
+        let userDefaults = UserDefaults(suiteName: #file)!
+        userDefaults.removePersistentDomain(forName: #file)
         let coder = Coder.shared
-        let urlSessionMock = URLSessionMock(responses: responses)
-        return DataManager(storage: UserDefaultsService(), networking: NetworkingService(session: urlSessionMock, coder: coder))
+        let urlSessionMock = URLSessionMock(responses: responses, testName: testName)
+        dataManager = DataManager(storage: UserDefaultsService(userDefaults: userDefaults, coder: coder),
+                                  networking: NetworkingService(session: urlSessionMock, coder: coder))
+        sut = MovieListViewModel(dataManager: dataManager)
     }
 }
