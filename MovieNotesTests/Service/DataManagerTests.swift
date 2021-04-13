@@ -17,7 +17,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchMoviesWithSuccessResult_genresShouldBeSavedToStorageAndPackageOfMoviesShouldBeFetched() {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .moviesData])
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
         var package: PackageOfMovies?
@@ -38,7 +38,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchMoviesWithFailureResultButFetchGenresWithSuccessResult_genresShouldBeSavedToStorage() {
         // given
-        configureSUT(withResponses: [.genresData, .error], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .error])
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
         // when
@@ -55,7 +55,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchMoviesAndGenresWereStoredBefore_shouldFetchGenresFromStorageNotFromNetwork() {
         // given
-        configureSUT(withResponses: [.moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.moviesData])
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let genresExpectation = expectation(description: "Genre expectation")
         var genre: Genre?
@@ -74,7 +74,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchingMoviesAndFetchGenresWithFailureResult_shouldGetError() {
         // given
-        configureSUT(withResponses: [.error, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.error, .moviesData])
         let errorExpectation = expectation(description: "Error expectation")
         var error: Error?
         // when
@@ -91,7 +91,7 @@ class DataManagerTests: XCTestCase {
     
     func testDataManager_whenFetchingMoviesAndGenresWereStoredBefore_networkRequestsCountShouldBeEqualOne() {
         // given
-        configureSUT(withResponses: [.moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.moviesData])
         let genresList = GenresList(genres: [Genre(id: 0, name: "Action"), Genre(id: 1, name: "Comedy")])
         let requestsCountExpectation = expectation(description: "Request count expectation")
         // when
@@ -105,7 +105,7 @@ class DataManagerTests: XCTestCase {
         }
     }
     
-    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String) {
+    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String = #function) {
         let userDefaults = UserDefaults(suiteName: #file)!
         userDefaults.removePersistentDomain(forName: #file)
         let coder = Coder.shared

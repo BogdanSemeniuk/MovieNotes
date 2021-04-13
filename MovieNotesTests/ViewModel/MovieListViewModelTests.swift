@@ -27,7 +27,7 @@ class MovieListViewModelTests: XCTestCase {
     
     func testMovieListViewModel_whenFetchMovies_subscriberWillGetLoadingState() throws {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .moviesData])
         let statusExpectation = expectation(description: "Status expectation")
         sut.statePublisher.sink { state in
             guard case .loading = state else { return }
@@ -57,7 +57,7 @@ class MovieListViewModelTests: XCTestCase {
 
     func testMovieListViewModel_whenFetchMovies_subscriberWillGetErrorState() throws {
         // given
-        configureSUT(withResponses: [.error], forTestWithName: #function)
+        configureSUT(withResponses: [.error])
         let statusExpectation = expectation(description: "Status expectation")
         var error: Error?
         sut.statePublisher.sink { state in
@@ -75,7 +75,7 @@ class MovieListViewModelTests: XCTestCase {
 
     func testMovieListViewModel_whenFetchMovies_subscriberWillGetMovies() throws {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .moviesData])
         let moviesExpectation = expectation(description: "Movies expectation")
         var movies = [Movie]()
         sut.moviesPublisher.valuePublisher.sink { fetchedMovies in
@@ -93,7 +93,7 @@ class MovieListViewModelTests: XCTestCase {
     
     func testMovieListViewModel_whenFetchMovies_moviesCountEqualsFetchedMoviesCount() throws {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .moviesData])
         let moviesExpectation = expectation(description: "Movies expectation")
         var fetchedMoviesCount = 0
         sut.moviesPublisher.valuePublisher.sink { fetchedMovies in
@@ -108,7 +108,7 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
     
-    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String) {
+    private func configureSUT(withResponses responses: [ResponseTypeMock], forTestWithName testName: String = #function) {
         let userDefaults = UserDefaults(suiteName: #file)!
         userDefaults.removePersistentDomain(forName: #file)
         let coder = Coder.shared
