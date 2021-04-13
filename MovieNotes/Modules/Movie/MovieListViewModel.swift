@@ -13,9 +13,10 @@ import PromiseKit
 protocol MovieListViewModelType {
     var statePublisher: Publishers.Drop<Published<State>.Publisher> { get }
     var moviesCount: Int { get }
-    func fetchMovies()
-    func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType
     var moviesPublisher: PublishableSubject<[Movie]> { get }
+    func fetchMovies()
+    func fetchNextPageOfMovies()
+    func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType
 }
 
 final class MovieListViewModel: MovieListViewModelType {
@@ -39,11 +40,16 @@ final class MovieListViewModel: MovieListViewModelType {
     func fetchMovies() {
         state = .loading
         dataManager.fetchMovies(page: page, moviesFilter: .nowPlaying).done { [weak self] packageOfMovies in
-            self?.moviesPublisher.value = packageOfMovies.results
+            self?.moviesPublisher.value.append(contentsOf: packageOfMovies.results)
         }.catch { [weak self] error in
             self?.state = .error(error)
         }.finally { [weak self] in
             self?.state = .finishedLoading
         }
+    }
+    
+    func fetchNextPageOfMovies() {
+        page += 1
+        fetchMovies()
     }
 }

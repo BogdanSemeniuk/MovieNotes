@@ -20,6 +20,7 @@ final class MoviesListViewController: UIViewController, Storyboarded {
     private var bindings = Set<AnyCancellable?>()
     private lazy var loadingViewController = LoadingViewController()
     @IBOutlet private weak var moviesTableView: UITableView!
+    private var didScrollToBottom = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +41,7 @@ final class MoviesListViewController: UIViewController, Storyboarded {
         })
         let moviesBinding = viewModel?.moviesPublisher.valuePublisher.sink{ [weak self] _ in
             self?.moviesTableView.reloadData()
+            self?.didScrollToBottom = false
         }
         bindings.insert(stateBinding)
         bindings.insert(moviesBinding)
@@ -59,4 +61,13 @@ extension MoviesListViewController: UITableViewDataSource {
 }
 
 extension MoviesListViewController: UITableViewDelegate {
+}
+
+extension MoviesListViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        guard scrollView.contentSize.height > scrollView.frame.height else { return }
+        guard scrollView.contentSize.height <= scrollView.frame.height + scrollView.contentOffset.y && !didScrollToBottom else { return }
+        didScrollToBottom = true
+        viewModel?.fetchNextPageOfMovies()
+    }
 }
