@@ -25,7 +25,7 @@ class MovieListViewModelTests: XCTestCase {
         bindings = nil
     }
     
-    func testMovieListViewModel_whenFetchMovies_subscriberWillGetLoadingState() throws {
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetLoadingState() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
         let statusExpectation = expectation(description: "Status expectation")
@@ -40,9 +40,9 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
 
-    func testMovieListViewModel_whenFetchMovies_subscriberWillGetFinishLoadingState() throws {
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetFinishLoadingState() {
         // given
-        configureSUT(withResponses: [.genresData, .moviesData], forTestWithName: #function)
+        configureSUT(withResponses: [.genresData, .moviesData])
         let statusExpectation = expectation(description: "Status expectation")
         sut.statePublisher.sink { state in
             guard case .finishedLoading = state else { return }
@@ -55,7 +55,7 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
 
-    func testMovieListViewModel_whenFetchMovies_subscriberWillGetErrorState() throws {
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetErrorState() {
         // given
         configureSUT(withResponses: [.error])
         let statusExpectation = expectation(description: "Status expectation")
@@ -73,7 +73,7 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
 
-    func testMovieListViewModel_whenFetchMovies_subscriberWillGetMovies() throws {
+    func testMovieListViewModel_whenFetchMovies_subscriberWillGetMovies() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
         let moviesExpectation = expectation(description: "Movies expectation")
@@ -91,7 +91,7 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
     
-    func testMovieListViewModel_whenFetchMovies_moviesCountEqualsFetchedMoviesCount() throws {
+    func testMovieListViewModel_whenFetchMovies_moviesCountEqualsFetchedMoviesCount() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
         let moviesExpectation = expectation(description: "Movies expectation")
@@ -105,6 +105,27 @@ class MovieListViewModelTests: XCTestCase {
         // then
         waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(self.sut.moviesCount, fetchedMoviesCount)
+        }
+    }
+    
+    func testMovieListViewModel_fetchMovieCellViewModelForIndexPath() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData])
+        let cellViewModelExpectation = expectation(description: "CellViewModel expectation")
+        var cellViewModel: MovieCellViewModelType?
+        var movie: Movie?
+        sut.moviesPublisher.valuePublisher.sink { movies in
+            let movieIndexPath = IndexPath(row: movies.count - 1, section: 0)
+            movie = movies[movieIndexPath.row]
+            cellViewModel = self.sut.movieCellViewModel(for: movieIndexPath)
+            cellViewModelExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchMovies()
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertNotNil(cellViewModel)
+            XCTAssertEqual(movie?.title, cellViewModel?.title)
         }
     }
     
