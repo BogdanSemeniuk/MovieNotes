@@ -13,28 +13,19 @@ class MovieCellViewModelTests: XCTestCase {
     var sut: MovieCellViewModel!
     let movie = Movie.testMovie
     
+    override func setUpWithError() throws {
+        sut = MovieCellViewModel(movie: movie)
+    }
+    
     override func tearDownWithError() throws {
         sut = nil
     }
-
-    func testMovieCellViewModel_whenInitWithMovie_shouldNotBeNil() throws {
-        // when
-        sut = MovieCellViewModel(movie: Movie.testMovie)
-        // then
-        XCTAssertNotNil(sut)
-    }
     
     func testMovieCellViewModel_whenInitWithMovie_movieTitleEqualMovieCellViewModelTitle() throws {
-        // when
-        sut = MovieCellViewModel(movie: Movie.testMovie)
-        // then
         XCTAssertEqual(sut.title, movie.title)
     }
     
     func testMovieCellViewModel_whenInitWithMovie_movieOverviewEqualMovieCellViewModelDescription() throws {
-        // when
-        sut = MovieCellViewModel(movie: Movie.testMovie)
-        // then
         XCTAssertEqual(sut.description, movie.overview)
     }
     
@@ -49,9 +40,6 @@ class MovieCellViewModelTests: XCTestCase {
     }
     
     func testMovieCellViewModel_whenInitWithMovie_movieCellViewModelCreatePosterURL() throws {
-        // when
-        sut = MovieCellViewModel(movie: movie)
-        // then
         XCTAssertEqual(sut.poster, URL(string: "https://image.tmdb.org/t/p/w342/adfadadfdfhdh.jpg"))
     }
     
