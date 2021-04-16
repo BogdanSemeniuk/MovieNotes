@@ -19,13 +19,14 @@ final class MoviesListViewController: UIViewController, Storyboarded {
     
     private var bindings = Set<AnyCancellable?>()
     private lazy var loadingViewController = LoadingViewController()
-    @IBOutlet private weak var moviesTableView: UITableView!
+    @IBOutlet private weak var moviesTableView: RefreshableTableView!
     private var didScrollToBottom = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
         viewModel?.fetchMovies()
+        moviesTableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
     private func setupBindings() {
@@ -45,6 +46,11 @@ final class MoviesListViewController: UIViewController, Storyboarded {
         }
         bindings.insert(stateBinding)
         bindings.insert(moviesBinding)
+    }
+    
+    @objc private func refresh(_ sender: Any) {
+        moviesTableView.refreshControl?.endRefreshing()
+        viewModel?.fetchMovies()
     }
 }
 

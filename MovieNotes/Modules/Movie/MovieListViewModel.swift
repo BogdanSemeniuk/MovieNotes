@@ -38,6 +38,7 @@ final class MovieListViewModel: MovieListViewModelType {
     }
 
     func fetchMovies() {
+        page = 1
         state = .loading
         dataManager.fetchMovies(page: page, moviesFilter: .nowPlaying).done { [weak self] packageOfMovies in
             self?.moviesPublisher.value.append(contentsOf: packageOfMovies.results)
