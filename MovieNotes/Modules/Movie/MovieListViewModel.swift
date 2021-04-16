@@ -14,7 +14,7 @@ protocol MovieListViewModelType {
     var statePublisher: Publishers.Drop<Published<State>.Publisher> { get }
     var moviesCount: Int { get }
     var moviesPublisher: PublishableSubject<[Movie]> { get }
-    func fetchMovies()
+    func fetchFirstPageOfMovies()
     func fetchNextPageOfMovies()
     func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType
 }
@@ -26,7 +26,7 @@ final class MovieListViewModel: MovieListViewModelType {
         return moviesPublisher.value.count
     }
     @Published private var state = State.loading
-    private var page = 1
+    private(set) var page = 1
     private let dataManager: DataManager
     
     init(dataManager: DataManager) {
@@ -36,21 +36,26 @@ final class MovieListViewModel: MovieListViewModelType {
     func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType {
         return MovieCellViewModel(movie: moviesPublisher.value[indexPath.row])
     }
-
-    func fetchMovies() {
+    
+    func fetchNextPageOfMovies() {
+        page += 1
+        fetchMovies(page: page)
+    }
+    
+    func fetchFirstPageOfMovies() {
         page = 1
+        fetchMovies(page: page)
+    }
+    
+    private func fetchMovies(page: Int) {
         state = .loading
         dataManager.fetchMovies(page: page, moviesFilter: .nowPlaying).done { [weak self] packageOfMovies in
-            self?.moviesPublisher.value.append(contentsOf: packageOfMovies.results)
+            guard page == 1 else { self?.moviesPublisher.value.append(contentsOf: packageOfMovies.results); return }
+            self?.moviesPublisher.value = packageOfMovies.results
         }.catch { [weak self] error in
             self?.state = .error(error)
         }.finally { [weak self] in
             self?.state = .finishedLoading
         }
-    }
-    
-    func fetchNextPageOfMovies() {
-        page += 1
-        fetchMovies()
     }
 }

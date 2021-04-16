@@ -34,7 +34,7 @@ class MovieListViewModelTests: XCTestCase {
             statusExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { (_) in
         }
@@ -49,7 +49,7 @@ class MovieListViewModelTests: XCTestCase {
             statusExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { (_) in
         }
@@ -66,7 +66,7 @@ class MovieListViewModelTests: XCTestCase {
             statusExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { (_) in
             XCTAssertNotNil(error)
@@ -83,7 +83,7 @@ class MovieListViewModelTests: XCTestCase {
             moviesExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(movies.count, 3)
@@ -101,7 +101,7 @@ class MovieListViewModelTests: XCTestCase {
             moviesExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { _ in
             XCTAssertEqual(self.sut.moviesCount, fetchedMoviesCount)
@@ -121,11 +121,76 @@ class MovieListViewModelTests: XCTestCase {
             cellViewModelExpectation.fulfill()
         }.store(in: &bindings)
         // when
-        sut.fetchMovies()
+        sut.fetchFirstPageOfMovies()
         // then
         waitForExpectations(timeout: 1) { _ in
             XCTAssertNotNil(cellViewModel)
             XCTAssertEqual(movie?.title, cellViewModel?.title)
+        }
+    }
+    
+    func testMovieListViewModel_whenFetchNextPageOfMovies_pageIncreaseByOne() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData])
+        // when
+        sut.fetchNextPageOfMovies()
+        // then
+        XCTAssertEqual(sut.page, 2)
+    }
+    
+    func testMovieListViewModel_whenFetchFirstPageOfMoviesCoupleTimes_pageEqualOne() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData, .moviesData])
+        // when
+        sut.fetchFirstPageOfMovies()
+        sut.fetchFirstPageOfMovies()
+        // then
+        XCTAssertEqual(sut.page, 1)
+    }
+    
+    func testMovieListViewModel_whenFetchFirstPageOfMoviesCoupleTimes_fetchedMoviesShouldOverwritePreviouslyStoredMovies() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData, .moviesData])
+        let moviesExpectation = expectation(description: "Movies expectation")
+        var responseCount = 0
+        var fetchedMoviesCount = 0
+        sut.moviesPublisher.valuePublisher.sink { movies in
+            responseCount += 1
+            fetchedMoviesCount = movies.count
+            guard responseCount == 2 else { return }
+            moviesExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchFirstPageOfMovies()
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+            self.sut.fetchFirstPageOfMovies()
+        }
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertEqual(fetchedMoviesCount, 3)
+        }
+    }
+    
+    func testMovieListViewModel_whenFetchNextPageOfMovies_fetchedMoviesShouldAppend() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData, .moviesData])
+        let moviesExpectation = expectation(description: "Movies expectation")
+        var responseCount = 0
+        var fetchedMoviesCount = 0
+        sut.moviesPublisher.valuePublisher.sink { movies in
+            responseCount += 1
+            fetchedMoviesCount = movies.count
+            guard responseCount == 2 else { return }
+            moviesExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchFirstPageOfMovies()
+        DispatchQueue.global().asyncAfter(deadline: .now() + 0.1) {
+            self.sut.fetchNextPageOfMovies()
+        }
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertEqual(fetchedMoviesCount, 6)
         }
     }
     

@@ -25,7 +25,7 @@ final class MoviesListViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupBindings()
-        viewModel?.fetchMovies()
+        viewModel?.fetchFirstPageOfMovies()
         moviesTableView.refreshControl?.addTarget(self, action: #selector(refresh), for: .valueChanged)
     }
     
@@ -50,7 +50,7 @@ final class MoviesListViewController: UIViewController, Storyboarded {
     
     @objc private func refresh(_ sender: Any) {
         moviesTableView.refreshControl?.endRefreshing()
-        viewModel?.fetchMovies()
+        viewModel?.fetchFirstPageOfMovies()
     }
 }
 
