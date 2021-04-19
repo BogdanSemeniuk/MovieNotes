@@ -129,6 +129,26 @@ class MovieListViewModelTests: XCTestCase {
         }
     }
     
+    func testMovieListViewModel_fetchMovieForIndexPath() {
+        // given
+        configureSUT(withResponses: [.genresData, .moviesData])
+        let movieExpectation = expectation(description: "Movie expectation")
+        var movieIndexPath: IndexPath!
+        var movie: Movie?
+        sut.moviesPublisher.valuePublisher.sink { movies in
+            movieIndexPath = IndexPath(row: movies.count - 1, section: 0)
+            movie = movies[movieIndexPath.row]
+            movieExpectation.fulfill()
+        }.store(in: &bindings)
+        // when
+        sut.fetchFirstPageOfMovies()
+        // then
+        waitForExpectations(timeout: 1) { _ in
+            XCTAssertNotNil(movie)
+            XCTAssertEqual(movie?.title, self.sut.movie(for: movieIndexPath).title)
+        }
+    }
+    
     func testMovieListViewModel_whenFetchNextPageOfMovies_pageIncreaseByOne() {
         // given
         configureSUT(withResponses: [.genresData, .moviesData])
