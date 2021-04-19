@@ -10,12 +10,12 @@ import UIKit
 import Combine
 
 protocol MoviesListCoordinatorDelegate: class {
-    
+    func showDetails(of movie: Movie)
 }
 
 final class MoviesListViewController: UIViewController, Storyboarded {
     weak var coordinator: MoviesListCoordinatorDelegate?
-    var viewModel: MovieListViewModelType?
+    var viewModel: MovieListViewModelType!
     
     private var bindings = Set<AnyCancellable?>()
     private lazy var loadingViewController = LoadingViewController()
@@ -67,6 +67,10 @@ extension MoviesListViewController: UITableViewDataSource {
 }
 
 extension MoviesListViewController: UITableViewDelegate {
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        coordinator?.showDetails(of: viewModel.movie(for: indexPath))
+    }
 }
 
 extension MoviesListViewController: UIScrollViewDelegate {

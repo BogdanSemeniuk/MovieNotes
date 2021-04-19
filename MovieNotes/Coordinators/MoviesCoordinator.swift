@@ -25,5 +25,14 @@ final class MoviesCoordinator: Coordinator {
 }
 
 extension MoviesCoordinator: MoviesListCoordinatorDelegate {
+    func showDetails(of movie: Movie) {
+        let vc = MovieDetailsViewController.instantiateFromStoryboard()
+        vc.movieDetails = MovieDetails(movie: movie)
+        vc.viewModel = MovieDetailsViewModel()
+        router.show(vc, animated: true)
+    }
+}
+
+extension MoviesCoordinator: MovieDetailsCoordinatorDelegate {
     
 }

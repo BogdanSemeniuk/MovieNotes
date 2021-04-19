@@ -17,6 +17,7 @@ protocol MovieListViewModelType {
     func fetchFirstPageOfMovies()
     func fetchNextPageOfMovies()
     func movieCellViewModel(for indexPath: IndexPath) -> MovieCellViewModelType
+    func movie(for indexPath: IndexPath) -> Movie
 }
 
 final class MovieListViewModel: MovieListViewModelType {
@@ -45,6 +46,10 @@ final class MovieListViewModel: MovieListViewModelType {
     func fetchFirstPageOfMovies() {
         page = 1
         fetchMovies(page: page)
+    }
+    
+    func movie(for indexPath: IndexPath) -> Movie {
+        return moviesPublisher.value[indexPath.row]
     }
     
     private func fetchMovies(page: Int) {
