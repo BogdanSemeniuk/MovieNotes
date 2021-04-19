@@ -46,4 +46,13 @@ class MoviesCoordinatorTests: XCTestCase {
         // then
         XCTAssertNotNil(viewController.viewModel)
     }
+    
+    func testMoviesCoordinator_whenShowDetailsOfMovie_movieDetailsViewControllerInitWithViewModelAndCoordinator() {
+        // when
+        sut.showDetails(of: Movie.testMovie)
+        guard let viewController = router.navigationController.viewControllers.first as? MovieDetailsViewController else { XCTFail("First viewController must be MovieDetailsViewController"); return }
+        // then
+        XCTAssertNotNil(viewController.viewModel)
+        XCTAssertNotNil(viewController.coordinator)
+    }
 }

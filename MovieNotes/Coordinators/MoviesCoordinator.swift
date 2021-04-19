@@ -29,6 +29,7 @@ extension MoviesCoordinator: MoviesListCoordinatorDelegate {
         let vc = MovieDetailsViewController.instantiateFromStoryboard()
         vc.movieDetails = MovieDetails(movie: movie)
         vc.viewModel = MovieDetailsViewModel()
+        vc.coordinator = self
         router.show(vc, animated: true)
     }
 }
